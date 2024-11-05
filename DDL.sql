@@ -9,6 +9,10 @@
 SET FOREIGN_KEY_CHECKS=0;
 SET AUTOCOMMIT = 0;
 
+-- =====================
+-- DEFINE TABLES
+-- =====================
+
 -- Citation for the following function(s):
 -- Date: 10/28/2024
 -- Based on CREATE/INSERT table function from CS340 - Activity 1: Creating a Customer Object Table
@@ -72,7 +76,7 @@ CREATE OR REPLACE TABLE Pokemon_Types (
 	FOREIGN KEY (typeID) REFERENCES Types(typeID) ON DELETE CASCADE
 );
 
-CREATE OR REPLACE TABLE People_Battles(
+CREATE OR REPLACE TABLE People_Battles (
 	peopleID int, 
 	battleID int NOT NULL, 
 	battleResult varchar(255) NOT NULL, 
@@ -81,14 +85,9 @@ CREATE OR REPLACE TABLE People_Battles(
 	FOREIGN KEY (battleID) REFERENCES Battles(battleID) ON DELETE CASCADE
 );
 
-DESCRIBE Pokemon; 
-DESCRIBE Affiliations; 
-DESCRIBE People;
-DESCRIBE Types;
-DESCRIBE Battles;
-DESCRIBE Pokemon_People;
-DESCRIBE Pokemon_Types;
-DESCRIBE People_Battles;
+-- =====================
+-- INSERT SAMPLE DATA 
+-- =====================
 
 -- Citation for the following function(s):
 -- Date: 10/24/2024
@@ -100,83 +99,71 @@ DESCRIBE People_Battles;
 --  Source referenced is Ranks on Team Rocket Fandom
 --  Source URL: https://teamrocket.fandom.com/wiki/Ranks
 
-
-INSERT INTO Pokemon 
-(	pokeName, isBaby, pokeRarity)
+INSERT INTO Pokemon (pokeName, isBaby, pokeRarity)
 VALUES 
-(	"Pikachu", 0, "Common"),
-(	"Charizard", 0, "Rare"),
-(	"Budew", 1, "Common"),
-(	"Mewtwo", 0, "Legendary"),
-(	"Arceus", 0, "Mythical"); 
+	("Pikachu", 0, "Common"),
+	("Charizard", 0, "Rare"),
+	("Budew", 1, "Common"),
+	("Mewtwo", 0, "Legendary"),
+	("Arceus", 0, "Mythical"); 
 
-INSERT INTO Affiliations
-(	affiliationType, affiliationRank, typeDescription)
+INSERT INTO Affiliations (affiliationType, affiliationRank, typeDescription)
 VALUES 
-(	"Team Rocket", "Agent", "Villanious organization"), 
-(	"Trainer", "Gym Leader", "Elite trainers"), 
-(	"Trainer", "Apprentice", "Standard trainers");
+	("Team Rocket", "Agent", "Villanious organization"), 
+	("Trainer", "Gym Leader", "Elite trainers"), 
+	("Trainer", "Apprentice", "Standard trainers");
 
-
-INSERT INTO People
-(	peopleName, affiliationID)
+INSERT INTO People (peopleName, affiliationID)
 VALUES 
-(	"Jessie", (SELECT affiliationID
-			FROM Affiliations
-			WHERE affiliationType = "Team Rocket"
-			AND affiliationRank = "Agent")), 
-(	"Misty", (SELECT affiliationID
-			FROM Affiliations
-			WHERE affiliationType = "Trainer"
-			AND affiliationRank = "Gym Leader")), 
-(	"Ash", (SELECT affiliationID
-			FROM Affiliations
-			WHERE affiliationType = "Trainer"
-			AND affiliationRank = "Apprentice")); 
+	("Jessie", (SELECT affiliationID
+				FROM Affiliations
+				WHERE affiliationType = "Team Rocket"
+				AND affiliationRank = "Agent")), 
+	("Misty", (SELECT affiliationID
+				FROM Affiliations
+				WHERE affiliationType = "Trainer"
+				AND affiliationRank = "Gym Leader")), 
+	("Ash", (SELECT affiliationID
+				FROM Affiliations
+				WHERE affiliationType = "Trainer"
+				AND affiliationRank = "Apprentice")); 
 
-INSERT INTO Types
-(	typeName, weakAgainst, strongAgainst)
+INSERT INTO Types (typeName, weakAgainst, strongAgainst)
 VALUES 
-(	"Fire", "Water", "Grass"), 
-(	"Water", "Electric", "Fire"), 
-(	"Grass", "Fire", "Water"),
-(	"Ghost", "Dark", "Psychic"), 
-(	"Electric", "Ground", "Water"), 
-(	"Psychic", "Bug", "Poison"), 
-(	"Normal", "Rock", "Ghost");
+	("Fire", "Water", "Grass"), 
+	("Water", "Electric", "Fire"), 
+	("Grass", "Fire", "Water"),
+	("Ghost", "Dark", "Psychic"), 
+	("Electric", "Ground", "Water"), 
+	("Psychic", "Bug", "Poison"), 
+	("Normal", "Rock", "Ghost");
 
-
-INSERT INTO Battles
-(	battleDate, battleSetting)
+INSERT INTO Battles (battleDate, battleSetting)
 VALUES 
-(	'2024-10-10', "Forest"), 
-(	'2024-10-11', "Gym"), 
-(	'2024-10-12', "Cave");
+	('2024-10-10', "Forest"), 
+	('2024-10-11', "Gym"), 
+	('2024-10-12', "Cave");
 
-INSERT INTO Pokemon_Types
-(	pokeID, typeID)
+INSERT INTO Pokemon_Types (pokeID, typeID)
 VALUES 
-(	(SELECT pokeID FROM Pokemon WHERE pokeName = "Pikachu"), (SELECT typeID FROM Types WHERE typeName = "Electric")), 
-(	(SELECT pokeID FROM Pokemon WHERE pokeName = "Charizard"), (SELECT typeID FROM Types WHERE typeName = "Fire")), 
-(	(SELECT pokeID FROM Pokemon WHERE pokeName = "Budew"), (SELECT typeID FROM Types WHERE typeName = "Grass")),
-(	(SELECT pokeID FROM Pokemon WHERE pokeName = "Mewtwo"), (SELECT typeID FROM Types WHERE typeName = "Psychic")),
-(	(SELECT pokeID FROM Pokemon WHERE pokeName = "Arceus"), (SELECT typeID FROM Types WHERE typeName = "Normal"));
+	((SELECT pokeID FROM Pokemon WHERE pokeName = "Pikachu"), (SELECT typeID FROM Types WHERE typeName = "Electric")), 
+	((SELECT pokeID FROM Pokemon WHERE pokeName = "Charizard"), (SELECT typeID FROM Types WHERE typeName = "Fire")), 
+	((SELECT pokeID FROM Pokemon WHERE pokeName = "Budew"), (SELECT typeID FROM Types WHERE typeName = "Grass")),
+	((SELECT pokeID FROM Pokemon WHERE pokeName = "Mewtwo"), (SELECT typeID FROM Types WHERE typeName = "Psychic")),
+	((SELECT pokeID FROM Pokemon WHERE pokeName = "Arceus"), (SELECT typeID FROM Types WHERE typeName = "Normal"));
 
-
-INSERT INTO Pokemon_People
-(	pokeID, peopleID, pokeNickname, caughtDate, caughtAt)
+INSERT INTO Pokemon_People (pokeID, peopleID, pokeNickname, caughtDate, caughtAt)
 VALUES 
-(	(SELECT pokeID FROM Pokemon WHERE pokeName = "Pikachu"), (SELECT peopleID FROM People WHERE peopleName = "Ash"), NULL, '2024-09-07', "Pallet Town"),
-(	(SELECT pokeID FROM Pokemon WHERE pokeName = "Charizard"), (SELECT peopleID FROM People WHERE peopleName = "Misty"), NULL, '2024-07-01', "Cerulean City"),
-(	(SELECT pokeID FROM Pokemon WHERE pokeName = "Budew"), (SELECT peopleID FROM People WHERE peopleName = "Jessie"), "Buddy", '2024-09-21', "Pinwheel Forest");
+	((SELECT pokeID FROM Pokemon WHERE pokeName = "Pikachu"), (SELECT peopleID FROM People WHERE peopleName = "Ash"), NULL, '2024-09-07', "Pallet Town"),
+	((SELECT pokeID FROM Pokemon WHERE pokeName = "Charizard"), (SELECT peopleID FROM People WHERE peopleName = "Misty"), NULL, '2024-07-01', "Cerulean City"),
+	((SELECT pokeID FROM Pokemon WHERE pokeName = "Budew"), (SELECT peopleID FROM People WHERE peopleName = "Jessie"), "Buddy", '2024-09-21', "Pinwheel Forest");
 
-INSERT INTO People_Battles
-(	peopleID, battleID, battleResult)
+INSERT INTO People_Battles (peopleID, battleID, battleResult)
 VALUES 
-(	1, 1, "Won"), 
-(	2, 1, "Lost"), 
-(	1, 2, "Lost"), 
-(	3, 2, "Won");
+	(1, 1, "Won"), 
+	(2, 1, "Lost"), 
+	(1, 2, "Lost"), 
+	(3, 2, "Won");
 			
 SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
