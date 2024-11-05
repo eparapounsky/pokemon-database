@@ -79,7 +79,7 @@ CREATE OR REPLACE TABLE Pokemon_Types (
 CREATE OR REPLACE TABLE People_Battles (
 	peopleID int, 
 	battleID int NOT NULL, 
-	battleResult ENUM('Won', 'Lost', 'Tie') NOT NULL, 
+	battleResult varchar(255) NOT NULL, 
 	PRIMARY KEY (peopleID, battleID),
 	FOREIGN KEY (peopleID) REFERENCES People(peopleID) ON DELETE CASCADE,
 	FOREIGN KEY (battleID) REFERENCES Battles(battleID) ON DELETE CASCADE
