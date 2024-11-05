@@ -61,6 +61,7 @@
     font-family: 'Hachi Maru Pop', cursive;
     color: var(--color-blue-light);
     padding: 5px;
+    padding-bottom: 20px;
     background-color: var(--color-viridian-darker);
 
   }
@@ -118,11 +119,10 @@
   }
 
   nav:not(.web-dev-concepts){
-    padding-left: 50px;
-    padding-top: 5px;
-    top: 35px;
-    right: 5%;
-    position: absolute;
+    position: relative;
+    display: inline-block;
+    top: -30px;
+    left: 50px;
     font-family: 'Figtree', sans-serif;
     text-decoration: none;
   }
@@ -325,7 +325,6 @@
     justify-content: center;
   }
   input{
-    padding: 2px; 
     color: var(--color-viridian-dark-alpha);
     border: 1px dashed var(--color-viridian-dark);
     padding-bottom: 10px;

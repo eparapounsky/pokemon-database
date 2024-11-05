@@ -42,8 +42,8 @@
     function newPokemon() { showform('insert'); }
     function updatePokemon(pokeID) { showform('update'); }
     function deletePokemon(pokeID) { showform ('delete'); }
-    function browsePokemon() { showform ('browse'); }
     function showAll() { showform ('all'); }
+    function browsePokemon() { showform ('browse'); }
 </script>
 </head>
 
@@ -58,6 +58,9 @@
         <a href="affiliations.html">Affiliations</a>
         <a href="types.html">Types</a>
         <a href="battles.html">Battles</a>
+        <a href="pokemontypes.html">Pokemon Types</a>
+        <a href="pokemonpeople.html">Owned Pokemon</a>
+        <a href="peoplebattles.html">Player Battles</a>
      </nav>
      <main>
         <section>  
@@ -66,56 +69,59 @@
                 <p id = "center">
                     List of known Pokemon. 
                 </p>
+                
                 <div id="browse">
-                    <p id ="centerMargin"><a href="#" onClick="showAll()">Display all forms</a> </p>
+                    <p id = "center"><a href="#" onClick="showAll()">Display all forms</a> | <a href="#" onClick="browsePokemon()">Hide forms</a><br>
+                      <a href="#" onClick="newPokemon()">New</a>
+                    </p>
                     <table border="1" cellpadding="5" id="centerMargin">
                       <tr>
-                        <th><a href="#" onClick="newPokemon()">New</a></th>
-                        <th></th>
                         <th>pokeid</th>
                         <th>pokeName</th>
                         <th>isBaby</th>
                         <th>pokeRarity</th>
+                        <th>Edit Entry</th>
+                        <th>Delete Entry</th>
                       </tr>
                       <tr>
-                        <td><a href="#" onClick="updatePokemon('this.pokeID')">Edit</a></td>
-                        <td><a href="#" onclick="deletePokemon('this.pokeID')">Delete</a></td>
                         <td align="right" >1</td>
                         <td>Pikachu</td>
                         <td>False</td>
                         <td>Common</td>
-                      </tr>
-                      <tr>
                         <td><a href="#" onClick="updatePokemon('this.pokeID')">Edit</a></td>
                         <td><a href="#" onclick="deletePokemon('this.pokeID')">Delete</a></td>
+                      </tr>
+                      <tr>
                         <td align="right" >2</td>
                         <td>Charizard</td>
                         <td>False</td>
                         <td>Rare</td>
-                      </tr>
-                      <tr>
                         <td><a href="#" onClick="updatePokemon('this.pokeID')">Edit</a></td>
                         <td><a href="#" onclick="deletePokemon('this.pokeID')">Delete</a></td>
+                      </tr>
+                      <tr>
                         <td align="right">3</td>
                         <td>Budew</td>
                         <td>True</td>
                         <td>Common</td>
-                      </tr>
-                      <tr>
                         <td><a href="#" onClick="updatePokemon('this.pokeID')">Edit</a></td>
                         <td><a href="#" onclick="deletePokemon('this.pokeID')">Delete</a></td>
+                      </tr>
+                      <tr>
                         <td align="right">4</td>
                         <td>Mewtwo</td>
                         <td>False</td>
                         <td>Legendary</td>
-                      </tr>
-                      <tr>
                         <td><a href="#" onClick="updatePokemon('this.pokeID')">Edit</a></td>
                         <td><a href="#" onclick="deletePokemon('this.pokeID')">Delete</a></td>
+                      </tr>
+                      <tr>
                         <td align="right">5</td>
                         <td>Arceus</td>
                         <td>False</td>
                         <td>Mythical</td>
+                        <td><a href="#" onClick="updatePokemon('this.pokeID')">Edit</a></td>
+                        <td><a href="#" onclick="deletePokemon('this.pokeID')">Delete</a></td>
                       </tr>
                     </table>
                     <p>&nbsp;</p>
@@ -138,10 +144,11 @@
                                     <option value="3">Legendary</option>
                                     <option value="4">Mythical</option>
                                     </select>
-                          </fieldset>
-                              <input class="btn" type="submit" id="addPokemon" value="Add Pokemon">
-                              <input class="btn" type="button" value="cancel" onClick="browsePokemon()">
-                        </form> 
+                          </fieldset><p id ="center">
+                              <button type="submit" id="addPokemon">Add Pokemon</button>
+                              <button type="button" onClick="browsePokemon()">Cancel</button>
+                              </p>
+                            </form> 
                     </div><!-- insert -->
                     <p>&nbsp;</p>
                     <div id="update">
@@ -166,9 +173,10 @@
                                     <option value="4">Mythical</option>
                                     </select>
                           </fieldset>
-                              <input class="btn" type="submit" id="UpdateSavePokemon" value="Save Pokemon Updates">
-                              <input class="btn" type="button" value="cancel" onClick="browsePokemon()">
-                        </form> 
+                          <p id = "center">
+                              <button type="submit" id="UpdateSavePokemon">Save Pokemon Updates</button>
+                              <button type="button" onClick="browsePokemon()">Cancel</button></p>
+                            </form> 
                     </div><!-- update -->
                     <p>&nbsp;</p>
                     <div id="delete" style="display: block">
@@ -182,9 +190,11 @@
                                 <label> <strong>Pokemon Name: </strong> </label> Pikachu
                                 
                         </fieldset>
-                        <input class="btn" type="submit" id="deletePokemon" value="Delete Person">
-                              <input class="btn" type="button" value="cancel" onClick="browsePokemon()">
-                      </form> 
+                        <p id = "center">
+                          <button type="submit" id="deletePokemon">Delete Pokemon</button>
+                          <button type="button" onClick="browsePokemon()">Cancel</button>
+                        </p>
+                            </form> 
                     </div><!-- delete -->
                 </main>
 <footer>© 2024 - Elena Parapounsky & Amy Xu</footer>    
