@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>People</title>
+<title>Pokemon Management Database - People</title>
 <link href="main.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript">
 		function showform(dowhat) {
@@ -58,6 +58,7 @@
         <a href="affiliations.html">Affiliations</a>
         <a href="types.html">Types</a>
         <a href="battles.html">Battles</a>
+        <br><br>
         <a href="pokemontypes.html">Pokemon Types</a>
         <a href="pokemonpeople.html">Owned Pokemon</a>
         <a href="peoplebattles.html">Player Battles</a>
@@ -106,21 +107,26 @@
                     </table>
                     <p>&nbsp;</p>
                     </div> <!-- browse -->
-                    <div id="insert">
+                    <div id="insert" style="display: none">
                         <form method="POST" id="addPerson">
                             <legend><strong>Add Person</strong></legend>
                               <fieldset class="fields">
                                 <label> Name </label> <input type="text" name="peopleName">
                                 <br>
-                                <label> Affiliation ID </label> <input type="text" name="affiliationID">
-                          </fieldset><p id ="center">
+                                <label> Affiliation </label> <select name="affiliation">
+                                  <option value="0">&nbsp;</option>
+                                  <option value="1">1 - Team Rocket Agent</option>
+                                  <option value="2">2 - Trainer Gym Leader</option>
+                                  <option value="3">3 - Trainer Apprentice</option>
+                                  </select>
+                                  <br>
                               <button type="submit" id="addPerson">Add Person</button>
                               <button type="button" onClick="browsePerson()">Cancel</button>
                               </p>
                             </form> 
                     </div><!-- insert -->
                     <p>&nbsp;</p>
-                    <div id="update">
+                    <div id="update" style="display: none">
                         <form method="POST" id="updatePerson">
                             <legend><strong>Update Person</strong></legend>
                               <fieldset class="fields">
@@ -129,7 +135,12 @@
                                 <br>
                                 <label> Name </label> <input type="text" name="peopleName" value="Jessie">
                                 <br>
-                                <label> Affiliation ID  </label> <input type="text" name="affiliationID" value="1">
+                                <label> Affiliation  </label><select name="affiliation">
+                                  <option value="0">1 - Team Rocket Agent</option>
+                                  <option value="1">2 - Trainer Gym Leader</option>
+                                  <option value="2">3 - Trainer Apprentice</option>
+                                  </select>
+                                  <br><br>
                           </fieldset>
                           <p id = "center">
                               <button type="submit" id="UpdateSavePerson">Save Person Updates</button>
@@ -137,7 +148,7 @@
                             </form> 
                     </div><!-- update -->
                     <p>&nbsp;</p>
-                    <div id="delete" style="display: block">
+                    <div id="delete" style="display: none">
                       <form method="POST" id="deletePerson">
                           <legend><strong>Delete Person</strong></legend>
                               <fieldset class="fields">
@@ -146,7 +157,7 @@
                               <label><strong>ID#: </strong></label> 1
                               <br>
                                 <label> <strong>Name: </strong> </label> Jessie
-                                
+                                <br><br>
                         </fieldset>
                         <p id = "center">
                           <button type="submit" id="deletePerson">Delete Person</button>

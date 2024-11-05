@@ -61,7 +61,7 @@
     font-family: 'Hachi Maru Pop', cursive;
     color: var(--color-blue-light);
     padding: 5px;
-    padding-bottom: 20px;
+    padding-bottom: 60px;
     background-color: var(--color-viridian-darker);
 
   }
@@ -121,7 +121,7 @@
   nav:not(.web-dev-concepts){
     position: relative;
     display: inline-block;
-    top: -30px;
+    top: -70px;
     left: 50px;
     font-family: 'Figtree', sans-serif;
     text-decoration: none;
@@ -327,8 +327,8 @@
   input{
     color: var(--color-viridian-dark-alpha);
     border: 1px dashed var(--color-viridian-dark);
-    padding-bottom: 10px;
-    margin-bottom: 20px;
+/*    padding-bottom: 10px;
+    margin-bottom: 20px; */
     font-size: 110%;
   }
   input::placeholder {
