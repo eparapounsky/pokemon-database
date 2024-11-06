@@ -73,8 +73,8 @@ WHERE peopleID = :peopleID_selected_from_browse_People_page;
 --                    Affiliations Table                          --
 ---------------------------------------------------------------
 -- Create
-INSERT INTO Affiliations (affiliationType, affiliationRank)
-VALUES (:affiliationTypeInput, :affiliationRankInput); 
+INSERT INTO Affiliations (affiliationType, affiliationRank, typeDescription)
+VALUES (:affiliationTypeInput, :affiliationRankInput, :typeDescriptionInput); 
 
 -- Read
 SELECT *
@@ -82,7 +82,7 @@ FROM Affiliations;
 
 -- Update
 UPDATE Affiliations
-SET affiliationType = :affiliationTypeInput, affiliationRank = affiliationRankInput
+SET affiliationType = :affiliationTypeInput, affiliationRank = :affiliationRankInput, typeDescription = :typeDescriptionInput
 WHERE affliationID =  :affiliationID_selected_from_browse_Affiliations_page;
 
 -- Delete
