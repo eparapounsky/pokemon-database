@@ -115,6 +115,7 @@
                     </table>
                     <p>&nbsp;</p>
                     </div> <!-- browse -->
+
                     <div id="insert" style="display: none">
                         <form method="POST" id="addPokePers">
                             <legend><strong>Add an owned Pokemon</strong></legend>
@@ -137,7 +138,7 @@
                                 <br>
                                 <label> Nickname </label> <input type="text" name="pokeNickname">
                                 <br>
-                                <label>Caught Date</label> <input type="datetime-local" id="caughtDate">
+                                <label>Caught Date</label> <input type="date" id="caughtDate">
                                   <br>
                                 <label> Caught Location </label> <input type="text" name="caughtAt">
                               <br>
@@ -146,6 +147,7 @@
                               </p>
                             </form> 
                     </div><!-- insert -->
+
                     <p>&nbsp;</p>
                     <div id="update" style="display: none">
                         <form method="POST" id="updatePokePers">
@@ -167,7 +169,7 @@
                                 <br>
                                 <label> Nickname </label> <input type="text" name="pokeNickname">
                                 <br>
-                                <label>Caught Date</label> <input type="datetime-local" id="caughtDate" value="">
+                                <label>Caught Date</label> <input type="date" id="caughtDate" value="2024-09-07">
                                   <br>
                                 <label> Caught Location </label> <input type="text" name="caughtAt" value="Pallet Town">
                                   <br><br>
@@ -177,6 +179,7 @@
                               <button type="button" onClick="browsePokePers()">Cancel</button></p>
                             </form> 
                     </div><!-- update -->
+
                     <p>&nbsp;</p>
                     <div id="delete" style="display: none">
                       <form method="POST" id="deletePokePers">
@@ -197,6 +200,8 @@
                         </p>
                             </form> 
                     </div><!-- delete -->
+
+                </article></section>
                 </main>
 <footer>© 2024 - Elena Parapounsky & Amy Xu</footer>    
 </body>    
