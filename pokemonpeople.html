@@ -77,8 +77,8 @@
                     </p>
                     <table border="1" cellpadding="5" id="centerMargin">
                       <tr>
-                        <th>pokeID</th>
-                        <th>peopleID</th>
+                        <th>Pokemon</th>
+                        <th>Owner</th>
                         <th>pokeNickname</th>
                         <th>caughtDate</th>
                         <th>caughtAt</th>
@@ -86,8 +86,8 @@
                         <th>Delete Entry</th>
                       </tr>
                       <tr>
-                        <td align="right">1</td>
-                        <td align="right">3</td>
+                        <td>Pikachu</td>
+                        <td>Ash</td>
                         <td></td>
                         <td align="right">2024-09-07</td>
                         <td>Pallet Town</td>
@@ -95,8 +95,8 @@
                         <td><a href="#" onclick="deletePokePers('this.pokepersID')">Delete</a></td>
                       </tr>
                       <tr>
-                        <td align="right">2</td>
-                        <td align="right">2</td>
+                        <td>Charizard</td>
+                        <td>Misty</td>
                         <td></td>
                         <td align="right">2024-07-01</td>
                         <td>Cerulean City</td>
@@ -104,8 +104,8 @@
                         <td><a href="#" onclick="deletePokePers('this.pokepersID')">Delete</a></td>
                       </tr>
                       <tr>
-                        <td align="right">3</td>
-                        <td align="right">1</td>
+                        <td>Budew</td>
+                        <td>Jessie</td>
                         <td>Buddy</td>
                         <td align="right">2024-09-21</td>
                         <td>Pinwheel Forest</td>
@@ -121,25 +121,25 @@
                               <fieldset class="fields">
                                 <label> Owner </label> <select name="people">
                                     <option value="0">&nbsp;</option>
-                                    <option value="1">1 - Jessie</option>
-                                    <option value="2">2 - Misty</option>
-                                    <option value="3">3 - Ash</option>
+                                    <option value="1">Jessie</option>
+                                    <option value="2">Misty</option>
+                                    <option value="3">Ash</option>
                                     </select>
                                     <br>
                                 <label> Pokemon </label> <select name="pokemon">
                                     <option value="0">&nbsp;</option>
-                                    <option value="1">1 - Pikachu</option>
-                                    <option value="2">2 - Charizard</option>
-                                    <option value="3">3 - Budew</option>
-                                    <option value="4">4 - Mewtwo</option>
-                                    <option value="5">5 - Arceus</option>
+                                    <option value="1">Pikachu</option>
+                                    <option value="2">Charizard</option>
+                                    <option value="3">Budew</option>
+                                    <option value="4">Mewtwo</option>
+                                    <option value="5">Arceus</option>
                                     </select>
                                 <br>
-                                <label> Nickname </label> <input type="text" name="Nickname">
+                                <label> Nickname </label> <input type="text" name="pokeNickname">
                                 <br>
-                                <label>Caught Date</label> <input type="datetime-local" id="caughtdate">
+                                <label>Caught Date</label> <input type="datetime-local" id="caughtDate">
                                   <br>
-                                <label> Caught Location </label> <input type="text" name="caughtat">
+                                <label> Caught Location </label> <input type="text" name="caughtAt">
                               <br>
                                 <button type="submit" id="addPokePers">Add Pokemon</button>
                               <button type="button" onClick="browsePokePers()">Cancel</button>
@@ -152,24 +152,24 @@
                             <legend><strong>Update Owned Pokemon</strong></legend>
                               <fieldset class="fields">
                                 <label> Owner </label> <select name="people">
-                                    <option value="0">3 - Ash</option>
-                                    <option value="1">1 - Jessie</option>
-                                    <option value="2">2 - Misty</option>
+                                    <option value="0">Ash</option>
+                                    <option value="1">Jessie</option>
+                                    <option value="2">Misty</option>
                                     </select>
                                     <br>
                                 <label> Pokemon </label> <select name="pokemon">
-                                    <option value="0">1 - Pikachu</option>
-                                    <option value="1">2 - Charizard</option>
-                                    <option value="2">3 - Budew</option>
-                                    <option value="3">4 - Mewtwo</option>
-                                    <option value="4">5 - Arceus</option>
+                                    <option value="0">Pikachu</option>
+                                    <option value="1">Charizard</option>
+                                    <option value="2">Budew</option>
+                                    <option value="3">Mewtwo</option>
+                                    <option value="4">Arceus</option>
                                     </select>
                                 <br>
-                                <label> Nickname </label> <input type="text" name="Nickname">
+                                <label> Nickname </label> <input type="text" name="pokeNickname">
                                 <br>
-                                <label>Caught Date</label> <input type="datetime-local" id="caughtdate" value="">
+                                <label>Caught Date</label> <input type="datetime-local" id="caughtDate" value="">
                                   <br>
-                                <label> Caught Location </label> <input type="text" name="caughtat" value="Pallet Town">
+                                <label> Caught Location </label> <input type="text" name="caughtAt" value="Pallet Town">
                                   <br><br>
                           </fieldset>
                           <p id = "center">

@@ -66,7 +66,7 @@
      <main>
         <section>  
             <h2>Pokemon Typing</h2>
-            <article id = "pokemonpeople">
+            <article id = "pokemontypes">
                 <p id = "center">
                     List of Pokemon and their associated typing. 
                 </p>
@@ -77,32 +77,38 @@
                     </p>
                     <table border="1" cellpadding="5" id="centerMargin">
                       <tr>
-                        <th>pokeID</th>
-                        <th>typeID</th>
+                        <th>Pokemon</th>
+                        <th>Type</th>
                         <th>Edit Entry</th>
                         <th>Delete Entry</th>
                       </tr>
                       <tr>
-                        <td align="right">1</td>
-                        <td align="right">5</td>
+                        <td>Pikachu</td>
+                        <td>Electric</td>
                         <td><a href="#" onClick="updatePokeType('this.PokeTypeID')">Edit</a></td>
                         <td><a href="#" onclick="deletePokeType('this.PokeTypeID')">Delete</a></td>
                       </tr>
                       <tr>
-                        <td align="right">2</td>
-                        <td align="right">1</td>
+                        <td>Charizard</td>
+                        <td>Fire</td>
                         <td><a href="#" onClick="updatePokeType('this.PokeTypeID')">Edit</a></td>
                         <td><a href="#" onclick="deletePokeType('this.PokeTypeID')">Delete</a></td>
                       </tr>
                       <tr>
-                        <td align="right">3</td>
-                        <td align="right">3</td>
+                        <td>Budew</td>
+                        <td>Grass</td>
                         <td><a href="#" onClick="updatePokeType('this.PokeTypeID')">Edit</a></td>
                         <td><a href="#" onclick="deletePokeType('this.PokeTypeID')">Delete</a></td>
                       </tr>
                       <tr>
-                        <td align="right">4</td>
-                        <td align="right">6</td>
+                        <td>Mewtwo</td>
+                        <td>Psychic</td>
+                        <td><a href="#" onClick="updatePokeType('this.PokeTypeID')">Edit</a></td>
+                        <td><a href="#" onclick="deletePokeType('this.PokeTypeID')">Delete</a></td>
+                      </tr>
+                      <tr>
+                        <td>Arceus</td>
+                        <td>Normal</td>
                         <td><a href="#" onClick="updatePokeType('this.PokeTypeID')">Edit</a></td>
                         <td><a href="#" onclick="deletePokeType('this.PokeTypeID')">Delete</a></td>
                       </tr>
@@ -113,24 +119,24 @@
                         <form method="POST" id="addPokeType">
                             <legend><strong>Add a Pokemon and their typing</strong></legend>
                               <fieldset class="fields">
-                                <label> Pokemon </label> <select name="pokemon">
+                                <label> Pokemon </label> <select name="Pokemon">
                                     <option value="0">&nbsp;</option>
-                                    <option value="1">1 - Pikachu</option>
-                                    <option value="2">2 - Charizard</option>
-                                    <option value="3">3 - Budew</option>
-                                    <option value="4">4 - Mewtwo</option>
-                                    <option value="5">5 - Arceus</option>
+                                    <option value="1">Pikachu</option>
+                                    <option value="2">Charizard</option>
+                                    <option value="3">Budew</option>
+                                    <option value="4">Mewtwo</option>
+                                    <option value="5">Arceus</option>
                                     </select>
                                 <br>
-                                <label> Type </label> <select name="type">
+                                <label> Type </label> <select name="Type">
                                     <option value="0">&nbsp;</option>
-                                    <option value="1">1 - Fire</option>
-                                    <option value="2">2 - Water</option>
-                                    <option value="3">3 - Grass</option>
-                                    <option value="4">4 - Ghost</option>
-                                    <option value="5">5 - Electric</option>
-                                    <option value="6">6 - Psychic</option>
-                                    <option value="7">7 - Normal</option>
+                                    <option value="1">Fire</option>
+                                    <option value="2">Water</option>
+                                    <option value="3">Grass</option>
+                                    <option value="4">Ghost</option>
+                                    <option value="5">Electric</option>
+                                    <option value="6">Psychic</option>
+                                    <option value="7">Normal</option>
                                     </select>
                               <br>
                                 <button type="submit" id="addPokeType">Add Typing to Pokemon</button>
@@ -143,22 +149,22 @@
                         <form method="POST" id="updatePokeType">
                             <legend><strong>Update Pokemon and their Typing</strong></legend>
                               <fieldset class="fields">
-                                <label> Pokemon </label> <select name="pokemon">
-                                    <option value="0">1 - Pikachu</option>
-                                    <option value="1">2 - Charizard</option>
-                                    <option value="2">3 - Budew</option>
-                                    <option value="3">4 - Mewtwo</option>
-                                    <option value="4">5 - Arceus</option>
+                                <label> Pokemon </label> <select name="Pokemon">
+                                    <option value="0">Pikachu</option>
+                                    <option value="1">Charizard</option>
+                                    <option value="2">Budew</option>
+                                    <option value="3">Mewtwo</option>
+                                    <option value="4">Arceus</option>
                                     </select>
                                 <br>
-                                <label> Type </label> <select name="type">
-                                    <option value="0">5 - Electric</option>
-                                    <option value="1">1 - Fire</option>
-                                    <option value="2">2 - Water</option>
-                                    <option value="3">3 - Grass</option>
-                                    <option value="4">4 - Ghost</option>
-                                    <option value="5">6 - Psychic</option>
-                                    <option value="6">7 - Normal</option>
+                                <label> Type </label> <select name="Type">
+                                    <option value="0">Electric</option>
+                                    <option value="1">Fire</option>
+                                    <option value="2">Water</option>
+                                    <option value="3">Grass</option>
+                                    <option value="4">Ghost</option>
+                                    <option value="5">Psychic</option>
+                                    <option value="6">Normal</option>
                                     </select>
                                 <br><br>
                           </fieldset>
@@ -172,7 +178,7 @@
                       <form method="POST" id="deletePokeType">
                           <legend><strong>Delete Pokemon Typing</strong></legend>
                               <fieldset class="fields">
-                              <p>Are you sure you want to delete this Pokemon Typing from the database?</p>
+                              <p>Are you sure you want to delete this Pokemon Type pairing from the database?</p>
                               <input type="hidden" name="PokeTypeID" id="deletePokeTypeID" value="1">
                               <label><strong>Pokemon: </strong></label> Pikachu
                               <br>

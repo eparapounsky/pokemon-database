@@ -48,14 +48,14 @@ WHERE pokeID = :pokeID_selected_from_browse_Pokemon_page;
 ---------------------------------------------------------------
 -- Create
 --      get affialitionID and "Type Rank" affiliations for Affiliation dropdown
-SELECT affiliationID, CONCAT(affilationType, affiliationRank) AS affiliation
+SELECT affiliationID, CONCAT(affilationType,' ',affiliationRank) AS affiliation
 FROM Affiliations;
 
 INSERT INTO People (peopleName, affiliation)
 VALUES (:peopleNameInput, :affiliation_from_dropdown_Input); 
 
 -- Read
-SELECT peopleID, CONCAT(Affiliations.affiliationType, Affiliations.affiliationRank)
+SELECT peopleID, CONCAT(Affiliations.affiliationType,' ',Affiliations.affiliationRank)
 FROM People
 INNER JOIN Affiliations ON People.affiliationID = Affiliations.affiilationID;
 
@@ -190,6 +190,7 @@ INNER JOIN Types ON Pokemon_Types.typeID = Types.typeID;
 
 -- Update
 -- Unable to update as in intersecting table with no other attributes other than Primary keys
+
 
 -- Delete
 DELETE 
