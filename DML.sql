@@ -57,7 +57,7 @@ VALUES (:peopleNameInput, :affiliation_from_dropdown_Input);
 -- Read
 SELECT peopleID, CONCAT(Affiliations.affiliationType,' ',Affiliations.affiliationRank)
 FROM People
-INNER JOIN Affiliations ON People.affiliationID = Affiliations.affiilationID;
+INNER JOIN Affiliations ON People.affiliationID = Affiliations.affilationID;
 
 -- Update
 UPDATE People
