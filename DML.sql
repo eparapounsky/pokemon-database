@@ -55,7 +55,7 @@ INSERT INTO People (peopleName, affiliation)
 VALUES (:peopleNameInput, :affiliation_from_dropdown_Input); 
 
 -- Read
-SELECT peopleID, CONCAT(Affiliations.affiliationType,' ',Affiliations.affiliationRank)
+SELECT peopleID, peopleName, CONCAT(Affiliations.affiliationType,' ',Affiliations.affiliationRank)
 FROM People
 INNER JOIN Affiliations ON People.affiliationID = Affiliations.affiliationID;
 
