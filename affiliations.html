@@ -5,7 +5,49 @@
 <!-- <meta name="viewport" content="width=device-width,initial-scale=1"> -->
 <link href="main.css" rel="stylesheet" type="text/css" />
 
-<script language="JavaScript"></script>
+<script language="JavaScript">
+    function showform(dowhat) {
+			/*
+			* four DIVS: browse, insert, update, delete
+			* this function sets one visible the others not
+			*/
+			if (dowhat == 'insert'){
+				document.getElementById('browse').style.display = 'none';
+				document.getElementById('insert').style.display = 'block';
+				document.getElementById('update').style.display = 'none';
+				document.getElementById('delete').style.display = 'none';
+			}
+			else if (dowhat == 'update'){
+				document.getElementById('browse').style.display = 'none';
+				document.getElementById('insert').style.display = 'none';
+				document.getElementById('update').style.display = 'block';
+				document.getElementById('delete').style.display = 'none';
+			}
+			else if (dowhat == 'delete'){
+				document.getElementById('browse').style.display = 'none';
+				document.getElementById('insert').style.display = 'none';
+				document.getElementById('update').style.display = 'none';
+				document.getElementById('delete').style.display = 'block';
+			}
+            else if (dowhat == 'all'){
+				document.getElementById('browse').style.display = 'block';
+				document.getElementById('insert').style.display = 'block';
+				document.getElementById('update').style.display = 'block';
+				document.getElementById('delete').style.display = 'block';
+			}
+			else { //by default display browse
+				document.getElementById('browse').style.display = 'block';
+				document.getElementById('insert').style.display = 'none';
+				document.getElementById('update').style.display = 'none';
+				document.getElementById('delete').style.display = 'none';
+			}
+		}
+    function newAffiliation() { showform('insert'); }
+    function updateAffiliation(pid) { showform('update'); }
+    function deleteAffiliation(pid) { showform ('delete'); }
+    function browseAffiliation() { showform ('browse'); }
+    function showAll() { showform ('all'); }
+</script>
 
 <body>
     <header>
@@ -34,6 +76,11 @@
                     Affiliations and ranks of people
                 </p>
 
+                <div id="browse">
+                    <p id = "center"><a href="#" onClick="showAll()">Display all forms</a> | <a href="#" onClick="browseAffiliation()">Hide forms</a><br>
+                      <a href="#" onClick="newAffiliation()">New</a>
+                    </p>
+
                 <table border="1" cellpadding="5" id="centerMargin">
                     <tr>
                         <th>affiliationID</th>
@@ -48,31 +95,84 @@
                         <td>Team Rocket</td>
                         <td>Agent</td>
                         <td>Villainous organization</td>
-                        <td></td>
-                        <td></td>
+                        <td><a href="#" onClick="updateAffiliation('this.personID')">Edit</a></td>
+                        <td><a href="#" onclick="deleteAffiliation('this.personID')">Delete</a></td>
                     </tr>
                     <tr>
                         <td align="right" >2</td>
                         <td>Trainer</td>
                         <td>Gym Leader</td>
                         <td>Elite trainers</td>
-                        <td></td>
-                        <td></td>
+                        <td><a href="#" onClick="updateAffiliation('this.personID')">Edit</a></td>
+                        <td><a href="#" onclick="deleteAffiliation('this.personID')">Delete</a></td>
                     </tr>
                     <tr>
                         <td align="right" >3</td>
                         <td>Trainer</td>
                         <td>Apprentice</td>
                         <td>Standard trainers</td>
-                        <td></td>
-                        <td></td>
+                        <td><a href="#" onClick="updateAffiliation('this.personID')">Edit</a></td>
+                        <td><a href="#" onclick="deleteAffiliation('this.personID')">Delete</a></td>
                     </tr>
                 </table>
+            </div> <!-- browse -->
+            <p>&nbsp;</p>    
+            <div id="insert" style="display: none">
+                <form method="POST" id="addAffiliation">
+                    <legend><strong>Add Affiliation</strong></legend>
+                      <fieldset class="fields">
+                        <label> Affiliation Type </label> <input type="text" name="affiliationType">
+                        <br>
+                        <label> Affiliation Rank </label> <input type="text" name="affiliationRank">
+                        <br>
+                        <label> Type Description </label> <input type="text" name="typeDescription">
+                        <br>
+                  </fieldset><p id ="center">
+                      <button type="submit" id="addAffiliation">Add Affiliation</button>
+                      <button type="button" onClick="browseAffiliation()">Cancel</button>
+                      </p>
+                    </form> 
+            </div><!-- insert -->
+            <p>&nbsp;</p>
+            <div id="update" style="display: none">
+                <form method="POST" id="updateAffiliation">
+                    <legend><strong>Update Affiliation</strong></legend>
+                      <fieldset class="fields">
+                      <input type="hidden" name="affiliationID" id="updateAffiliationID" value="1">
+                        <label> ID#: </label>  1
+                        <br>
+                        <label> Affiliation Type </label> <input type="text" name="affiliationType">
+                        <br>
+                        <label> Affiliation Rank </label> <input type="text" name="affiliationRank">
+                        <br>
+                        <label> Type Description </label> <input type="text" name="typeDescription">
+                        <br>
+                  </fieldset>
+                  <p id = "center">
+                      <button type="submit" id="UpdateSaveAffiliation">Save Affiliation Updates</button>
+                      <button type="button" onClick="browseAffiliation()">Cancel</button></p>
+                    </form> 
+            </div><!-- update -->
+            <p>&nbsp;</p>
+            <div id="delete" style="display: none">
+                <form method="POST" id="deleteAffiliation">
+                    <legend><strong>Delete Affiliation</strong></legend>
+                        <fieldset class="fields">
+                        <p>Are you sure you want to delete this Affiliation from the database?</p>
+                        <input type="hidden" name="affiliationID" id="deleteAffiliationID" value="1">
+                        <label><strong>ID#: </strong></label> 1
+                        <br>
+                          <label> <strong>Affiliation Type: </strong> </label> Team Rocket
+                          
+                  </fieldset>
+                  <p id = "center">
+                    <button type="submit" id="deleteAffiliation">Delete Affiliation</button>
+                    <button type="button" onClick="browseAffiliation()">Cancel</button>
+                  </p>
+                      </form> 
+              </div><!-- delete -->
         </section>
      </main>
-
-
-
-
+<footer>© 2024 - Elena Parapounsky & Amy Xu</footer>    
 </body>
 </html>
