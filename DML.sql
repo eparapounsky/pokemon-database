@@ -216,7 +216,7 @@ INNER JOIN Pokemon ON Pokemon_Types.pokeID = Pokemon.pokeID;
 
 -- Update
 UPDATE People_Battles
-SET battleResults = :battleResultSelect;
+SET battleResult = :battleResultSelect;
 WHERE peopleID =  :peopleID_selected_from_browse_People_Battles_page
 AND battleID =  :battleID_selected_from_browse_People_Battles_page;
 
