@@ -5,7 +5,49 @@
 <!-- <meta name="viewport" content="width=device-width,initial-scale=1"> -->
 <link href="main.css" rel="stylesheet" type="text/css" />
 
-<script language="JavaScript"></script>
+<script language="JavaScript">
+    function showform(dowhat) {
+			/*
+			* four DIVS: browse, insert, update, delete
+			* this function sets one visible the others not
+			*/
+			if (dowhat == 'insert'){
+				document.getElementById('browse').style.display = 'none';
+				document.getElementById('insert').style.display = 'block';
+				document.getElementById('update').style.display = 'none';
+				document.getElementById('delete').style.display = 'none';
+			}
+			else if (dowhat == 'update'){
+				document.getElementById('browse').style.display = 'none';
+				document.getElementById('insert').style.display = 'none';
+				document.getElementById('update').style.display = 'block';
+				document.getElementById('delete').style.display = 'none';
+			}
+			else if (dowhat == 'delete'){
+				document.getElementById('browse').style.display = 'none';
+				document.getElementById('insert').style.display = 'none';
+				document.getElementById('update').style.display = 'none';
+				document.getElementById('delete').style.display = 'block';
+			}
+            else if (dowhat == 'all'){
+				document.getElementById('browse').style.display = 'block';
+				document.getElementById('insert').style.display = 'block';
+				document.getElementById('update').style.display = 'block';
+				document.getElementById('delete').style.display = 'block';
+			}
+			else { //by default display browse
+				document.getElementById('browse').style.display = 'block';
+				document.getElementById('insert').style.display = 'none';
+				document.getElementById('update').style.display = 'none';
+				document.getElementById('delete').style.display = 'none';
+			}
+		}
+    function newPersBat() { showform('insert'); }
+    function updatePersBat(pid) { showform('update'); }
+    function deletePersBat(pid) { showform ('delete'); }
+    function browsePersBat() { showform ('browse'); }
+    function showAll() { showform ('all'); }
+</script>
 
 <body>
     <header>
@@ -31,8 +73,13 @@
 
             <article id = "affiliations">
                 <p id = "center">
-                    List of battles that people have been in.
+                    List of battles that people have been in
                 </p>
+
+                <div id="browse">
+                    <p id = "center"><a href="#" onClick="showAll()">Display all forms</a> | <a href="#" onClick="browsePersBat()">Hide forms</a><br>
+                      <a href="#" onClick="newPersBat()">New</a>
+                    </p>
 
                 <table border="1" cellpadding="5" id="centerMargin">
                     <tr>
@@ -46,36 +93,122 @@
                         <td align="right" >1</td>
                         <td align="right" >1</td>
                         <td>Won</td>
-                        <td></td>
-                        <td></td>
+                        <td><a href="#" onClick="updatePersBat('this.persbatID')">Edit</a></td>
+                        <td><a href="#" onclick="deletePersBat('this.persbatID')">Delete</a></td>
                     </tr>
                     <tr>
                         <td align="right" >2</td>
                         <td align="right" >1</td>
                         <td>Lost</td>
-                        <td></td>
-                        <td></td>
+                        <td><a href="#" onClick="updatePersBat('this.persbatID')">Edit</a></td>
+                        <td><a href="#" onclick="deletePersBat('this.persbatID')">Delete</a></td>
                     </tr>
                     <tr>
                         <td align="right" >1</td>
                         <td align="right" >2</td>
                         <td>Lost</td>
-                        <td></td>
-                        <td></td>
+                        <td><a href="#" onClick="updatePersBat('this.persbatID')">Edit</a></td>
+                        <td><a href="#" onclick="deletePersBat('this.persbatID')">Delete</a></td>
                     </tr>
                     <tr>
                         <td align="right" >3</td>
                         <td align="right" >2</td>
                         <td>Won</td>
-                        <td></td>
-                        <td></td>
+                        <td><a href="#" onClick="updatePersBat('this.persbatID')">Edit</a></td>
+                        <td><a href="#" onclick="deletePersBat('this.persbatID')">Delete</a></td>
                     </tr>
                 </table>
+            </div> <!-- browse -->
+            <p>&nbsp;</p>    
+            <div id="insert" style="display: none">
+                <form method="POST" id="addPersBat">
+                    <legend><strong>Add Player Battle</strong></legend>
+                      <fieldset class="fields">
+                        <label> Player 1 </label> 
+                            <select name="people">
+                                <option value="0">&nbsp;</option>
+                                <option value="1">Jessie</option>
+                                <option value="2">Misty</option>
+                                <option value="3">Ash</option>
+                                </select>
+                        <br>
+                        <label> Player 2 </label> 
+                            <select name="people">
+                                <option value="0">&nbsp;</option>
+                                <option value="1">Jessie</option>
+                                <option value="2">Misty</option>
+                                <option value="3">Ash</option>
+                                </select>
+                        <br>
+                        <label> Who won the battle? </label> 
+                            <br>
+                            <input type="radio" id="player1" name="battleWinner" value="player1">
+                            <label for="battleWinner">Player 1</label>
+                            <br>
+                            <input type="radio" id="player2" name="battleWinner" value="player2">
+                            <label for="battleWinner">Player 2</label>
+                        <br>
+                  </fieldset><p id ="center">
+                      <button type="submit" id="addPersBat">Add Player</button>
+                      <button type="button" onClick="browsePersBat()">Cancel</button>
+                      </p>
+                    </form> 
+            </div><!-- insert -->
+            <p>&nbsp;</p>
+            <div id="update" style="display: none">
+                <form method="POST" id="updatePersBat">
+                    <legend><strong>Update Player Battle</strong></legend>
+                    <fieldset class="fields">
+                        <label> Player 1 </label> 
+                            <select name="people">
+                                <option value="0">Jessie</option>
+                                <option value="1">Misty</option>
+                                <option value="2">Ash</option>
+                                </select>
+                        <br>
+                        <label> Player 2 </label> 
+                            <select name="people">
+                                <option value="0">Misty</option>
+                                <option value="1">Jessie</option>
+                                <option value="2">Ash</option>
+                                </select>
+                        <br>
+                        <label> Who won the battle? </label> 
+                            <br>
+                            <input type="radio" id="player1" name="battleWinner" value="player1">
+                            <label for="battleWinner">Player 1</label>
+                            <br>
+                            <input type="radio" id="player2" name="battleWinner" value="player2">
+                            <label for="battleWinner">Player 2</label>
+                        <br>
+                  </fieldset>
+                  <p id = "center">
+                      <button type="submit" id="UpdateSavePersBat">Save Player Battle Updates</button>
+                      <button type="button" onClick="browsePersBat()">Cancel</button></p>
+                    </form> 
+            </div><!-- update -->
+            <p>&nbsp;</p>
+            <div id="delete" style="display: none">
+                <form method="POST" id="deletePersBat">
+                    <legend><strong>Delete Player Battle</strong></legend>
+                        <fieldset class="fields">
+                        <p>Are you sure you want to delete this Player Battle from the database?</p>
+                        <input type="hidden" name="persbatID" id="deletepersBatID" value="1">
+                        <label><strong> Battle ID#: </strong></label> 1
+                        <br>
+                        <label> <strong>Player 1 ID#: </strong> </label> 1
+                        <br>
+                        <label><strong> Player 1 ID#: </strong></label> 2
+                        <br>
+                  </fieldset>
+                  <p id = "center">
+                    <button type="submit" id="deletePersBat">Delete Player Battle</button>
+                    <button type="button" onClick="browsePersBat()">Cancel</button>
+                  </p>
+                      </form> 
+              </div><!-- delete -->
         </section>
      </main>
-
-
-
-
+<footer>© 2024 - Elena Parapounsky & Amy Xu</footer> 
 </body>
 </html>
