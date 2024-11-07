@@ -212,7 +212,7 @@ VALUES (:peopleID_from_dropdown_Input, :battleIDInput, :battleResultSelect);
 -- Read
 SELECT People.peopleName, battleID, battleResult
 FROM People_Battles
-INNER JOIN Pokemon ON Pokemon_Types.pokeID = Pokemon.pokeID;
+INNER JOIN People ON People.peopleID = People_Battles.peopleID;
 
 -- Update
 UPDATE People_Battles
