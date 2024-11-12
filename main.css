@@ -95,9 +95,14 @@
   }
   
   /* ----- Anchors ----- Text links */
-  a {}
+  a {
+    color: var(--color-blue); /* light blue link color */
+    text-decoration: none; /* remove underline */
+  }
   a:link {}
-  a:hover {}
+  a:hover {
+    color: var(--color-viridian-less-light); /* change color with hover */
+  }
   a:active {}
   a:visited {}
   
