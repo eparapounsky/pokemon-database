@@ -37,9 +37,9 @@ CREATE OR REPLACE TABLE Affiliations (
 CREATE OR REPLACE TABLE People (
     peopleID int AUTO_INCREMENT UNIQUE NOT NULL,
     peopleName varchar(255) NOT NULL,
-    affiliationID int NOT NULL,
+    affiliationID int,
 	PRIMARY KEY (peopleID), 
-	FOREIGN KEY (affiliationID) REFERENCES Affiliations(affiliationID)
+	FOREIGN KEY (affiliationID) REFERENCES Affiliations(affiliationID) ON DELETE SET NULL
 );
 
 CREATE OR REPLACE TABLE Types (
