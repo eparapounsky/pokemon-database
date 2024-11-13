@@ -81,7 +81,7 @@
                         <th>Owner</th>
                         <th>Pokemon Nickname</th>
                         <th>Caught Date</th>
-                        <th>Caught At</th>
+                        <th>Caught Location</th>
                         <th>Edit Entry</th>
                         <th>Delete Entry</th>
                       </tr>
@@ -120,14 +120,14 @@
                         <form method="POST" id="addPokePers">
                             <legend><strong>Add an owned Pokemon</strong></legend>
                               <fieldset class="fields">
-                                <label> Owner </label> <select name="people">
+                                <label>* Owner </label> <select name="people">
                                     <option value="0">&nbsp;</option>
                                     <option value="1">Jessie</option>
                                     <option value="2">Misty</option>
                                     <option value="3">Ash</option>
                                     </select>
                                     <br>
-                                <label> Pokemon </label> <select name="pokemon">
+                                <label>* Pokemon </label> <select name="pokemon">
                                     <option value="0">&nbsp;</option>
                                     <option value="1">Pikachu</option>
                                     <option value="2">Charizard</option>
@@ -138,9 +138,9 @@
                                 <br>
                                 <label> Nickname </label> <input type="text" name="pokeNickname">
                                 <br>
-                                <label>Caught Date</label> <input type="date" id="caughtDate">
+                                <label>* Caught Date</label> <input type="date" id="caughtDate">
                                   <br>
-                                <label> Caught Location </label> <input type="text" name="caughtAt">
+                                <label>* Caught Location </label> <input type="text" name="caughtAt">
                               <br>
                                 <button type="submit" id="addPokePers">Add Pokemon</button>
                               <button type="button" onClick="browsePokePers()">Cancel</button>
