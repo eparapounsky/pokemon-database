@@ -132,15 +132,15 @@
                         <form method="POST" id="addPokemon">
                             <legend><strong>Add Pokemon</strong></legend>
                               <fieldset class="fields">
-                                <label>* Pokemon Name </label> <input type="text" name="pokeName">
+                                <label>* Pokemon Name </label> <input type="text" name="pokeName" style="margin-bottom: 10px" required>
                                 <br>
-                                <label>* Is it a baby Pokemon? </label> <select name="isBaby">
+                                <label>* Is it a baby Pokemon? </label> <select name="isBaby" style="margin-bottom: 10px" required>
                                     <option value="0">&nbsp;</option>
                                     <option value="1">True</option>
                                     <option value="2">False</option>
                                     </select>
                                     <br>
-                                <label>* Rarity </label> <select name="pokeRarity">
+                                <label>* Rarity </label> <select name="pokeRarity" style="margin-bottom: 10px" required>
                                     <option value="0">&nbsp;</option>
                                     <option value="1">Common</option>
                                     <option value="2">Rare</option>
@@ -162,14 +162,14 @@
                               <input type="hidden" name="pokeID" id="updatePokemonID" value="1">
                                 <label> ID#: </label>  1
                                 <br>
-                                <label> Pokemon Name </label> <input type="text" name="pokeName" value="Pikachu">
+                                <label> Pokemon Name </label> <input type="text" name="pokeName" value="Pikachu" style="margin-bottom: 10px">
                                 <br>
-                                <label> Is it a baby Pokemon?  </label>  <select name="isBaby">
+                                <label> Is it a baby Pokemon?  </label>  <select name="isBaby" style="margin-bottom: 10px">
                                     <option value="0">False</option>
                                     <option value="1">True</option>
                                     </select>
                                   <br>
-                                <label> Rarity </label> <select name="pokeRarity">
+                                <label> Rarity </label> <select name="pokeRarity" style="margin-bottom: 10px">
                                     <option value="0">Common</option>
                                     <option value="1">Rare</option>
                                     <option value="2">Legendary</option>

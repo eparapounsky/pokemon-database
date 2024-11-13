@@ -153,11 +153,11 @@
                 <form method="POST" id="addType">
                     <legend><strong>Add Type</strong></legend>
                       <fieldset class="fields">
-                        <label>* Type Name </label> <input type="text" name="typeName" style="margin-bottom: 10px">
+                        <label>* Type Name </label> <input type="text" name="typeName" style="margin-bottom: 10px" required>
                         <br>
                         <!-- <label> Weak Against </label> <input type="text" name="weakAgainst" style="margin-bottom: 10px"> -->
                         <label>* Weak Against </label>
-                            <select name="weakAgainst" style="margin-bottom: 10px">
+                            <select name="weakAgainst" style="margin-bottom: 10px" required>
                                 <option value="0">&nbsp;</option>
                                 <option value="fire">Fire</option>
                                 <option value="water">Water</option>
@@ -169,7 +169,7 @@
                             </select>
                         <br>
                         <label>* Strong Against </label>
-                            <select name="strongAgainst" style="margin-bottom: 10px">
+                            <select name="strongAgainst" style="margin-bottom: 10px"  required>
                                 <option value="0">&nbsp;</option>
                                 <option value="fire">Fire</option>
                                 <option value="water">Water</option>

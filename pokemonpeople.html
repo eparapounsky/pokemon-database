@@ -120,14 +120,14 @@
                         <form method="POST" id="addPokePers">
                             <legend><strong>Add an owned Pokemon</strong></legend>
                               <fieldset class="fields">
-                                <label>* Owner </label> <select name="people">
+                                <label>* Owner </label> <select name="people" style="margin-bottom: 10px" required>
                                     <option value="0">&nbsp;</option>
                                     <option value="1">Jessie</option>
                                     <option value="2">Misty</option>
                                     <option value="3">Ash</option>
                                     </select>
                                     <br>
-                                <label>* Pokemon </label> <select name="pokemon">
+                                <label>* Pokemon </label> <select name="pokemon" style="margin-bottom: 10px" required>
                                     <option value="0">&nbsp;</option>
                                     <option value="1">Pikachu</option>
                                     <option value="2">Charizard</option>
@@ -136,11 +136,11 @@
                                     <option value="5">Arceus</option>
                                     </select>
                                 <br>
-                                <label> Nickname </label> <input type="text" name="pokeNickname">
+                                <label> Nickname </label> <input type="text" name="pokeNickname" style="margin-bottom: 10px">
                                 <br>
-                                <label>* Caught Date</label> <input type="date" id="caughtDate">
+                                <label>* Caught Date</label> <input type="date" id="caughtDate" style="margin-bottom: 10px" required>
                                   <br>
-                                <label>* Caught Location </label> <input type="text" name="caughtAt">
+                                <label>* Caught Location </label> <input type="text" name="caughtAt" style="margin-bottom: 10px" required>
                               <br>
                                 <button type="submit" id="addPokePers">Add Pokemon</button>
                               <button type="button" onClick="browsePokePers()">Cancel</button>
@@ -153,13 +153,13 @@
                         <form method="POST" id="updatePokePers">
                             <legend><strong>Update Owned Pokemon</strong></legend>
                               <fieldset class="fields">
-                                <label> Owner </label> <select name="people">
+                                <label> Owner </label> <select name="people" style="margin-bottom: 10px">
                                     <option value="0">Ash</option>
                                     <option value="1">Jessie</option>
                                     <option value="2">Misty</option>
                                     </select>
                                     <br>
-                                <label> Pokemon </label> <select name="pokemon">
+                                <label> Pokemon </label> <select name="pokemon" style="margin-bottom: 10px">
                                     <option value="0">Pikachu</option>
                                     <option value="1">Charizard</option>
                                     <option value="2">Budew</option>
@@ -167,11 +167,11 @@
                                     <option value="4">Arceus</option>
                                     </select>
                                 <br>
-                                <label> Nickname </label> <input type="text" name="pokeNickname">
+                                <label> Nickname </label> <input type="text" name="pokeNickname" style="margin-bottom: 10px">
                                 <br>
-                                <label>Caught Date</label> <input type="date" id="caughtDate" value="2024-09-07">
+                                <label>Caught Date</label> <input type="date" id="caughtDate" value="2024-09-07" style="margin-bottom: 10px">
                                   <br>
-                                <label> Caught Location </label> <input type="text" name="caughtAt" value="Pallet Town">
+                                <label> Caught Location </label> <input type="text" name="caughtAt" value="Pallet Town" style="margin-bottom: 10px">
                                   <br><br>
                           </fieldset>
                           <p id = "center">

@@ -112,9 +112,9 @@
                         <form method="POST" id="addPerson">
                             <legend><strong>Add Person</strong></legend>
                               <fieldset class="fields">
-                                <label>* Name </label> <input type="text" name="peopleName">
+                                <label>* Name </label> <input type="text" name="peopleName" style="margin-bottom: 10px" required>
                                 <br>
-                                <label> Affiliation </label> <select name="affiliation">
+                                <label>* Affiliation </label> <select name="affiliation" style="margin-bottom: 10px" required>
                                   <option value="0">&nbsp;</option>
                                   <option value="1">Team Rocket Agent</option>
                                   <option value="2">Trainer Gym Leader</option>
@@ -131,10 +131,10 @@
                         <form method="POST" id="updatePerson">
                             <legend><strong>Update Person</strong></legend>
                               <fieldset class="fields">
-                              <input type="hidden" name="peopleID" id="updatePersonID" value="1">
+                              <input type="hidden" name="peopleID" id="updatePersonID" style="margin-bottom: 10px" value="1">
                                 <label> ID#: </label>  1
                                 <br>
-                                <label> Name </label> <input type="text" name="peopleName" value="Jessie">
+                                <label> Name </label> <input type="text" name="peopleName" style="margin-bottom: 10px" value="Jessie">
                                 <br>
                                 <label> Affiliation  </label><select name="affiliation">
                                   <option value="0">Team Rocket Agent</option>
