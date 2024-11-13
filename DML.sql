@@ -30,7 +30,7 @@ INSERT INTO Pokemon (pokeName, isBaby, pokeRarity)
 VALUES (:pokeNameInput, :isBabySelect, :pokeRaritySelect); 
 
 -- Read
-SELECT *
+SELECT pokeID AS "Pokemon ID", pokeName AS "Pokemon Name", isBaby AS "Is Baby?", pokeRarity AS "Pokemon Rarity"
 FROM Pokemon;
 
 -- Update
@@ -55,7 +55,7 @@ INSERT INTO People (peopleName, affiliation)
 VALUES (:peopleNameInput, :affiliation_from_dropdown_Input); 
 
 -- Read
-SELECT peopleID, peopleName, CONCAT(Affiliations.affiliationType,' ',Affiliations.affiliationRank)
+SELECT peopleID AS "Person ID", peopleName AS "Person Name", CONCAT(Affiliations.affiliationType,' ',Affiliations.affiliationRank) AS "Person Affiliation"
 FROM People
 INNER JOIN Affiliations ON People.affiliationID = Affiliations.affiliationID;
 
@@ -77,7 +77,7 @@ INSERT INTO Affiliations (affiliationType, affiliationRank, typeDescription)
 VALUES (:affiliationTypeInput, :affiliationRankInput, :typeDescriptionInput); 
 
 -- Read
-SELECT *
+SELECT affiliationID AS "Affiliation ID", affiliationType AS "Affiliation Type", affiliationRank AS "Affiliation Rank", typeDescription AS "Type Description"
 FROM Affiliations;
 
 -- Update
@@ -98,7 +98,7 @@ INSERT INTO Types (typeName, weakAgainst, strongAgainst)
 VALUES (:typeNameInput, :weakAgainstInput, :strongAgainstInput); 
 
 -- Read
-SELECT *
+SELECT typeID AS "Type ID", typeName AS "Type Name", weakAgainst AS "Weak Against", strongAgainst AS "Strong Against"
 FROM Types;
 
 -- Update
@@ -118,7 +118,7 @@ INSERT INTO Battles (battleDate, battleSetting)
 VALUES (:battleDateInput, :battleSettingInput); 
 
 -- Read
-SELECT *
+SELECT battleID AS "Battle ID", battleDate AS "Battle Date", battleSetting AS "Battle Setting"
 FROM Battles;
 
 -- Update
@@ -150,7 +150,7 @@ INSERT INTO Pokemon_People (Pokemon, Owner, pokeNickname, caughtDate, caughtAt)
 VALUES (:pokeID_from_dropdown_Input, :peopleID_from_dropdown_Input, :pokeNicknameInput, :caughtDateInput, :caughtAtInput); 
 
 -- Read
-SELECT Pokemon.pokeName, People.peopleName, pokeNickname, caughtDate, caughtAt
+SELECT Pokemon.pokeName AS Pokemon, People.peopleName AS Owner, pokeNickname AS "Pokemon Nickname", caughtDate AS "Caught Date", caughtAt AS "Caught Location"
 FROM Pokemon_People
 INNER JOIN Pokemon ON Pokemon_People.pokeID = Pokemon.pokeID
 INNER JOIN People ON Pokemon_People.peopleID = People.peopleID;
@@ -183,7 +183,7 @@ INSERT INTO Pokemon_Types (Pokemon, Type)
 VALUES (:pokeID_from_dropdown_Input, :typeID_from_dropdown_Input); 
 
 -- Read
-SELECT Pokemon.pokeName, Types.typeName
+SELECT Pokemon.pokeName AS Pokemon, Types.typeName AS Type
 FROM Pokemon_Types
 INNER JOIN Pokemon ON Pokemon_Types.pokeID = Pokemon.pokeID
 INNER JOIN Types ON Pokemon_Types.typeID = Types.typeID;
@@ -202,17 +202,12 @@ AND typeID =  :typeID_selected_from_browse_Pokemon_Types_page;
 --                 People_Battles Table                      --
 ---------------------------------------------------------------
 -- Create
---      get peopleID and peopleName for Contender dropdown
-SELECT peopleID, peopleName
-FROM People;
-
-INSERT INTO People_Battles (Contender, battleID, battleResult)
-VALUES (:peopleID_from_dropdown_Input, :battleIDInput, :battleResultSelect); 
+INSERT INTO People_Battles (PersonID, battleID, battleResult)
+VALUES (:personIDInput, :battleIDInput, :battleResultSelect); 
 
 -- Read
-SELECT People.peopleName, battleID, battleResult
-FROM People_Battles
-INNER JOIN People ON People.peopleID = People_Battles.peopleID;
+SELECT peopleID AS "Person ID", battleID AS "Battle ID", battleResult AS "Battle Result"
+FROM People_Battles;
 
 -- Update
 UPDATE People_Battles
