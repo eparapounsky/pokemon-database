@@ -78,11 +78,11 @@ CREATE OR REPLACE TABLE Pokemon_Types (
 
 CREATE OR REPLACE TABLE People_Battles (
 	peopleID int, 
-	battleID int NOT NULL, 
+	battleID int, 
 	battleResult varchar(255) NOT NULL, 
 	PRIMARY KEY (peopleID, battleID),
-	FOREIGN KEY (peopleID) REFERENCES People(peopleID) ON DELETE CASCADE ON UPDATE CASCADE,
-	FOREIGN KEY (battleID) REFERENCES Battles(battleID) ON DELETE CASCADE ON UPDATE CASCADE
+	FOREIGN KEY (peopleID) REFERENCES People(peopleID) ON DELETE SET NULL ON UPDATE CASCADE,
+	FOREIGN KEY (battleID) REFERENCES Battles(battleID) ON DELETE SET NULL ON UPDATE CASCADE
 );
 
 -- =====================
