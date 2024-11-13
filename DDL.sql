@@ -77,12 +77,14 @@ CREATE OR REPLACE TABLE Pokemon_Types (
 );
 
 CREATE OR REPLACE TABLE People_Battles (
+	peopleBattleID INT AUTO_INCREMENT UNIQUE NOT NULL,
 	peopleID int, 
-	battleID int, 
+	battleID int NOT NULL, 
 	battleResult varchar(255) NOT NULL, 
-	PRIMARY KEY (peopleID, battleID),
-	FOREIGN KEY (peopleID) REFERENCES People(peopleID) ON DELETE SET NULL ON UPDATE CASCADE,
-	FOREIGN KEY (battleID) REFERENCES Battles(battleID) ON DELETE SET NULL ON UPDATE CASCADE
+	UNIQUE (peopleID, battleID), -- make sure the same person isn't in the same battle more than once
+	PRIMARY KEY (peopleBattleID),
+	FOREIGN KEY (peopleID) REFERENCES People(peopleID) ON DELETE SET NULL ON UPDATE CASCADE, -- battles can remain even if a person is deleted
+	FOREIGN KEY (battleID) REFERENCES Battles(battleID) ON DELETE CASCADE ON UPDATE CASCADE -- if a battle is deleted, the associated people should also be deleted from this table
 );
 
 -- =====================
