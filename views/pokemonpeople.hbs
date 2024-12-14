@@ -1,0 +1,169 @@
+{{!-- 
+Citations:
+Date: 11/19/2024
+Structure of pokemonpeople.hbs code is from Step 4.
+Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+--}}
+
+{{!-- 
+Citations:
+Date: 11/19/2024
+Dynamically populated data for pokemonpeople.hbs adapted from Step 6.
+Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+ --}}
+
+{{!-- 
+Citations:
+Date: 11/19/2024
+Dynamically updating and deleting data for pokemonpeople.hbs adapted from Steps 7 and 8.
+Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+ --}}
+
+<script language = "JavaScript">
+    function newForm() { showform('insert'); }
+    function updateForm(pokemon) {
+
+        // Fills in form with data from selected row
+        document.getElementById("pokePeopleIDUpdate").value = pokemon.pokePeopleID;
+        document.getElementById("pokemonUpdate").value = pokemon.pokeID;
+        document.getElementById("peopleUpdate").value = pokemon.peopleID;
+        document.getElementById("pokeNicknameUpdate").value = pokemon.pokeNickname;
+        document.getElementById("caughtDateUpdate").value = pokemon.caughtDate;
+        document.getElementById("caughtAtUpdate").value = pokemon.caughtAt;
+        showform('update'); }
+    function showAll() { showform ('all'); }
+    function browseForm() { showform ('browse'); }
+</script>
+
+<main>{{!-- Create a table --}}
+    <section>  
+    <h2>Owned Pokemon</h2>
+    <article id = "pokemonpeople">
+        <p id = "center">
+            List of Pokemon that are owned by trainers. 
+        </p>
+
+        {{!-- Search function --}}
+        <form id="search-pokemonpeople-html" method='GET' action='/pokemonpeople' class="center-Margin">
+            <input type="text" name="pokemonpeopleSearch" id="pokemonpeopleSearch" placeholder="Search the table:">
+            <input type="submit">
+            <a href='/pokemonpeople'><button>Reset</button></a>
+        </form>
+
+        <div id="browse">
+        <p id = "center">
+            <a href="#" class="new-entry" onClick="newForm()">Add an Owner to a Pokemon</a>
+        </p>
+        <table border="1" cellpadding="5" id="pokemonperson-table" class="center-Margin">
+
+            {{!-- Header section --}}
+            <thead>
+
+                {{!-- For just the first row, we print each key of the row object as a header cell so we
+                know what each column means when the page renders --}}
+                <tr>
+                    <th>Pokemon</th>
+                    <th>Owner</th>
+                    <th>Nickname</th>
+                    <th>Caught Date</th>
+                    <th>Caught Location</th>
+                    <th>Edit Entry</th>
+                    <th>Delete Entry</th>
+                </tr>
+            </thead>
+
+            {{!-- Body section --}}
+            <tbody>
+                {{!-- For each row, print each attribute --}}
+                {{#each data}}
+                <tr data-value={{this.pokePeopleID}}>
+                    <td>{{this.pokeID.[0]}}</td>
+                    <td>{{this.peopleID.[0]}}</td>
+                    <td>{{this.pokeNickname}}</td>
+                    <td>{{moment this.caughtDate format="YYYY-MM-DD"}}</td> {{!-- Uses handlebar helper in app.js to format date --}}
+                    <td>{{this.caughtAt}}</td>
+                    {{!-- updatePokemon will take object with each attribute to prefill update form --}}
+                    {{!-- Tried to send {{this}} but could not get it working in the JavaScript --}}
+                    <td><button onclick="updateForm({pokePeopleID: {{this.pokePeopleID}}, pokeID: '{{this.pokeID.[1]}}', peopleID: '{{this.peopleID.[1]}}', pokeNickname: '{{this.pokeNickname}}', caughtDate: '{{moment this.caughtDate format="YYYY-MM-DD"}}', caughtAt: '{{this.caughtAt}}'})">Edit</button></td>
+                    <td><button onclick="deletePokemonPeople({{this.pokePeopleID}})">Delete</button></td>
+                </tr>
+                {{/each}}
+            </tbody> 
+        </table>
+        <script src="./js/deletePokemonPeople.js"></script>
+        </div>
+
+        {{!-- Form to add a record to the table  --}}
+        <div id="insert" style="display: none">
+        {{!-- <legend><strong>Add an Owned Pokemon</strong></legend> --}}
+        <p id = "center">To add an owned Pokemon, please enter their information below and click 'Submit'!</p>
+        <form id="addForm" method="POST" action="/addPokemonPeople" class="center-Margin">
+
+            <fieldset class="fields">
+                <label>* Owner </label> <select name="people" style="margin-bottom: 10px" required>
+                    <option value="" disabled selected></option>
+                    {{#each people}}
+                    <option value="{{this.peopleID}}">{{this.peopleName}}</option>
+                    {{/each}}
+                    </select>
+                    <br>
+                <label>* Pokemon </label> <select name="pokemon" style="margin-bottom: 10px" required>
+                    <option value="" disabled selected></option>
+                    {{#each pokemon}}
+                    <option value="{{this.pokeID}}">{{this.pokeName}}</option>
+                    {{/each}}
+                    </select>
+            <br>
+            <label> Nickname </label> <input type="text" name="pokeNickname" style="margin-bottom: 10px">
+            <br>
+            <label>* Caught Date</label> <input type="date" name="caughtDate" style="margin-bottom: 10px" required>
+                <br>
+            <label>* Caught Location </label> <input type="text" name="caughtAt" style="margin-bottom: 10px" required>
+            <br>
+            </fieldset>
+            <p id="center">
+                <a href="/pokemonpeople" class="cancel-button">Cancel</a>
+                <input type="submit">
+            </p>
+        </form>
+
+        </div>
+
+        {{!-- Form to update a record to the table  --}}
+        <div id="update" style="display: none">
+        {{!-- <legend><strong>Update Pokemon</strong></legend> --}}
+        <p id = "center">Update a Pokemon entry. </p>
+        <form id="updatePokemonPeople"  method="POST" action="/updatePokemonPeople" class="center-Margin">
+        <input type="hidden" name="pokePeopleID" id="pokePeopleIDUpdate"> <br>
+            <fieldset class="fields">
+                <label>* Owner </label> <select name="people" id="peopleUpdate" style="margin-bottom: 10px" required>
+
+                    {{#each people}}
+                    <option value="{{this.peopleID}}">{{this.peopleName}}</option>
+                    {{/each}}
+                    </select>
+                    <br>
+                <label>* Pokemon </label> <select name="pokemon" id="pokemonUpdate" style="margin-bottom: 10px" required>
+
+                    {{#each pokemon}}
+                    <option value="{{this.pokeID}}">{{this.pokeName}}</option>
+                    {{/each}}
+                    </select>
+                <br>
+                <label> Nickname </label> <input type="text" name="pokeNickname" id="pokeNicknameUpdate" style="margin-bottom: 10px">
+                <br>
+                <label>* Caught Date</label> <input type="date" name="caughtDate" id="caughtDateUpdate" style="margin-bottom: 10px" required>
+                    <br>
+                <label>* Caught Location </label> <input type="text" name="caughtAt" id="caughtAtUpdate" style="margin-bottom: 10px" required>
+                <br>
+            </fieldset>
+            <p id="center">
+                <a href="/pokemonpeople" class="cancel-button">Cancel</a>
+                <input type="submit">
+            </p>
+        </form>
+        </div>
+
+</article>
+</section>
+</main>

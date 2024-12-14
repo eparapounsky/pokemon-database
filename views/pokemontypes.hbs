@@ -1,0 +1,105 @@
+{{!-- 
+Citations:
+Date: 11/26/2024
+Structure of pokemontypes.hbs code is from Step 4.
+Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+--}}
+
+{{!-- 
+Citations:
+Date: 11/26/2024
+Dynamically populated data for pokemontypes.hbs adapted from Step 6.
+Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+ --}}
+
+{{!-- 
+Citations:
+Date: 11/26/2024
+Dynamically updating and deleting data for pokemontypes.hbs adapted from Steps 7 and 8.
+Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+ --}}
+
+<script language = "JavaScript">
+    function newForm() { showform('insert'); }
+    function showAll() { showform ('all'); }
+    function browseForm() { showform ('browse'); }
+</script>
+
+<main>{{!-- Create a table --}}
+    <section>  
+        <h2>Pokemon Typing</h2>
+        <article id = "pokemontype">
+            <p id = "center">
+                Pokemon and their associated typing. 
+            </p>
+
+            {{!-- Search function --}}
+            <form id="search-pokemontypes-html" method='GET' action='/pokemontypes' class="center-Margin">
+                <input type="text" name="pokemontypesSearch" id="pokemontypesSearch" placeholder="Search the table:">
+                <input type="submit">
+                <a href='/pokemontypes'><button>Reset</button></a>
+            </form>
+
+            <div id="browse">
+                <p id = "center">
+                    <a href="#" class="new-entry" onClick="newForm()">Add a Type to a Pokemon</a>
+                </p>
+
+                <table border="1" cellpadding="5" id="pokemontypes-table" class="center-Margin">
+                    {{!-- Header section --}}
+                    <thead>
+                        <tr>
+                            <th>Pokemon</th>
+                            <th>Type</th>
+                            <th>Delete Entry</th>
+                        </tr>
+                    </thead>
+
+                    {{!-- Body section --}}
+                    <tbody>
+                        {{!-- For each row, print each attribute --}}
+                        {{#each data}}
+                        <tr data-value = {{this.pokeID.[1]}}>
+                            <td>{{this.pokeID.[0]}}</td>
+                            <td>{{this.typeID.[0]}}</td>
+                            {{!-- updateForm will take object with each attribute to prefill update form --}}
+                            {{!-- Tried to send {{this}} but could not get it working in the JavaScript --}}
+                            <td><button onclick="deletePokemonTypes([{{this.pokeID.[1]}}, {{this.typeID.[1]}}])">Delete</button></td>
+                        </tr>
+                        {{/each}}
+                    </tbody> 
+                </table>
+                <script src="./js/deletePokemonTypes.js"></script>
+            </div>
+
+            {{!-- Form to add a record to the table  --}}
+            <div id="insert" style="display: none">
+                {{!-- <legend><strong>Add a Pokemon and their typing</strong></legend> --}}
+                <p id = "center">To add a Pokemon typing, please enter the information below and click 'Submit'!</p>
+
+                <form id="addForm" method="POST" action="/addPokemonTypes" class="center-Margin">
+                    <fieldset class="fields">
+                        <label>* Pokemon </label> <select name="pokemon" style="margin-bottom: 10px" required>
+                            <option value="" disabled selected></option>
+                            {{#each pokemon}}
+                            <option value="{{this.pokeID}}">{{this.pokeName}}</option>
+                            {{/each}}
+                            </select>
+                        <br>
+                        <label>* Type </label> <select name="type" style="margin-bottom: 10px" required>
+                            <option value="" disabled selected></option>
+                            {{#each types}}
+                            <option value="{{this.typeID}}">{{this.typeName}}</option>
+                            {{/each}}
+                            </select>
+                    </fieldset>
+
+                    <p id="center">
+                        <button type="button" onClick="browseForm()">Cancel</button>
+                        <input type="submit">
+                    </p>
+                </form>
+            </div>
+        </article>
+    </section>
+</main>

@@ -1,0 +1,126 @@
+{{!-- 
+Citations:
+Date: 11/24/2024
+Structure of battles.hbs code is from Step 4.
+Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+--}}
+
+{{!-- 
+Citations:
+Date: 11/24/2024
+Dynamically populated data for battles.hbs adapted from Step 6.
+Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+ --}}
+
+{{!-- 
+Citations:
+Date: 11/24/2024
+Dynamically updating and deleting data for battles.hbs adapted from Steps 7 and 8.
+Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+ --}}
+
+<script language = "JavaScript">
+    function newBattle() { showform('insert'); }
+    function updateBattle(battles) {
+        // Fills in form with data from selected row
+        document.getElementById("battleIDUpdate").value = battles.battleID;
+        document.getElementById("battleDateUpdate").value = battles.battleDate;
+        document.getElementById("battleSettingUpdate").value = battles.battleSetting;
+        showform('update'); }
+    function showAll() { showform ('all'); }
+    function browseBattles() { showform ('browse'); }
+</script>
+
+
+<main>{{!-- Create a table --}}
+    <section>  
+        <h2>Battles</h2>
+        <article id = "battles">
+            <p id = "center">
+                Battles that have taken place. 
+            </p>
+
+            {{!-- Search function --}}
+            <form id="search-battles-html" method='GET' action='/battles' class="center-Margin">
+                <input type="text" name="battlesSearch" id="battlesSearch" placeholder="Search the table:">
+                <input type="submit">
+                <a href='/battles'><button>Reset</button></a>
+            </form>
+
+            <div id="browse">
+                <p id = "center">
+                    <a href="#" class="new-entry" onClick="newBattle()">Add a new Battle</a>
+                </p>
+                
+                <table border="1" cellpadding="5" id="battles-table" class="center-Margin">
+                    {{!-- Header section --}}
+                    <thead>
+                        <tr>
+                            <th>Battle ID</th>
+                            <th>Battle Date</th>
+                            <th>Battle Setting</th>
+                            <th>Edit Entry</th>
+                            <th>Delete Entry</th>
+                        </tr>
+                    </thead>
+
+                    {{!-- Body section --}}
+                    <tbody>
+                        {{!-- For each row, print each attribute --}}
+                        {{#each data}}
+                        <tr data-value={{this.battleID}}>
+                            <td>{{this.battleID}}</td>
+                            <td>{{this.battleDate}}</td> 
+                            <td>{{this.battleSetting}}</td>
+                            <td><button onclick="updateBattle({battleID: {{this.battleID}}, battleDate: '{{this.battleDate}}', battleSetting:  '{{this.battleSetting}}'})">Edit</button></td>
+                            <td><button onclick="deleteBattle({{this.battleID}})">Delete</button></td>
+                        </tr>
+                        {{/each}}
+                    </tbody> 
+                </table>
+                <script src="./js/deleteBattles.js"></script>
+            </div>
+
+            {{!-- Form to add a record to the table  --}}
+            <div id="insert" style="display: none">
+                {{!-- <legend><strong>Add Battles</strong></legend> --}}
+                <p id = "center">To add a new battle, please enter its details below and click 'Submit'!</p>
+                <form id="addBattles" method="POST" action="/addBattles" class="center-Margin">
+                    <fieldset class="fields">
+                        <label>* Battle Date </label>
+                            <input type="date" name="battleDate" style="margin-bottom: 10px" required>
+                        <br>
+                        <label>* Battle Setting</label>
+                            <input type="text" name="battleSetting" style="margin-bottom: 10px" required> 
+                    </fieldset>
+
+                    <p id="center">
+                        <a href="/battles" class="cancel-button">Cancel</a>
+                        <input type="submit">
+                    </p>
+                </form>
+            </div>
+
+            {{!-- Form to update a record on the table  --}}
+            <div id="update" style="display: none">
+                {{!-- <legend><strong>Update Battles</strong></legend> --}}
+                <p id = "center">Update a Battle entry. </p>
+                <form id="updateBattles"  method="POST" action="/updateBattles" class="center-Margin">
+                    <input type="hidden" name="battleID" id="battleIDUpdate"> <br>
+                    <fieldset class="fields">
+                        <label>* Battle Date: </label> 
+                            <input type="date" name="battleDate" id="battleDateUpdate" style="margin-bottom: 10px" required>
+                        <br>
+                        <label>* Battle Setting: </label> 
+                            <input type="text" name="battleSetting" id="battleSettingUpdate" style="margin-bottom: 10px" required>
+                    </fieldset>
+
+                    <p id="center">
+                        <a href="/battles" class="cancel-button">Cancel</a>
+                        <input type="submit">
+                    </p>
+                </form>
+            </div>
+        </article>
+    </section>
+</main>

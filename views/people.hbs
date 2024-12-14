@@ -1,0 +1,164 @@
+{{!-- 
+Citations:
+Date: 11/20/2024
+Structure of people.hbs code is from Step 4.
+Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+--}}
+
+{{!-- 
+Citations:
+Date: 11/20/2024
+Dynamically populated data for people.hbs adapted from Step 6.
+Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+--}}
+
+{{!-- 
+Citations:
+Date: 11/20/2024
+Dynamically updating and deleting data for people.hbs adapted from Steps 7 and 8.
+Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+--}}
+
+{{!-- 
+Citations:
+Date: 11/24/2024
+Adapted if statement for conditionally displaying affiliationID in People table.
+Source URL: https://stackoverflow.com/questions/74788859/how-to-conditionally-render-data-within-a-handlebars-template-for-a-to-be-comput
+--}}
+
+{{!-- 
+Citations:
+Date: 11/24/2024
+Adapted if/else statement for conditionally passing affiliationID  or else null in People table.
+Source URL: https://stackoverflow.com/questions/10736907/handlebars-js-else-if
+--}}
+
+<script language = "JavaScript">
+    function newPeople() { showform('insert'); }
+    function updatePeople(people) {
+        // Fills in form with data from selected row
+        document.getElementById("peopleIDUpdate").value = people.peopleID;
+        document.getElementById("peopleNameUpdate").value = people.peopleName;
+        document.getElementById("affiliationIDUpdate").value = people.affiliationID;
+        showform('update'); }
+    function showAll() { showform ('all'); }
+    function browsePeople() { showform ('browse'); }
+</script>
+
+
+<main>{{!-- Create a table --}}
+    <section>  
+    <h2>People</h2>
+        <article id = "people">
+            <p id = "center">
+                People of interest (Trainers, Gym Leaders, Team Rocket, Professors). 
+            </p>
+
+            {{!-- Search function --}}
+            <form id="search-people-html" method='GET' action='/people' class="center-Margin">
+                <input type="text" name="peopleSearch" id="peopleSearch" placeholder="Search the table:">
+                <input type="submit">
+                <a href='/people'><button>Reset</button></a>
+            </form>
+
+            <div id="browse">
+                <p id = "center">
+                    <a href="#" class="new-entry" onClick="newPeople()">Add a new Person</a>
+                </p>
+
+                <table border="1" cellpadding="5" id="people-table" class="center-Margin">
+                    {{!-- Header section --}}
+                    <thead>
+                            <th>People ID</th>
+                            <th>Person Name</th>
+                            <th>Affiliation</th>
+                            <th>Edit Entry</th>
+                            <th>Delete Entry</th>
+                        </tr>
+                    </thead>
+
+                    {{!-- Body section --}}
+                    <tbody>
+                        {{!-- For each row, print each attribute --}}
+                        {{#each data}}
+                        <tr data-value={{this.peopleID}}>
+                            <td>{{this.peopleID}}</td>
+                            <td>{{this.peopleName}}</td>
+                            {{!-- check if person has an affiliationID; if yes, display associated affiliationType; if no, display "No Affiliation" --}}
+                            <td>{{#if this.affiliationID}}{{this.affiliationType}}{{else}}No Affiliation{{/if}}</td>
+                            <td>
+                                <button 
+                                    onclick="updatePeople({
+                                    peopleID: {{this.peopleID}}, 
+                                    peopleName: '{{this.peopleName}}',
+                                    {{!-- pass affiliationID if it exists, else pass null  --}}
+                                    affiliationID: {{#if this.affiliationID}}{{this.affiliationID}}{{else}}null{{/if}}
+                                    })">Edit
+                                </button>
+                            </td>
+                            <td><button onclick="deletePeople({{this.peopleID}})">Delete</button></td>
+                        </tr>
+                        {{/each}}
+                    </tbody> 
+                </table>
+
+                <script src="./js/deletePeople.js"></script>
+            </div>
+
+            {{!-- Form to add a record to the table  --}}
+            <div id="insert" style="display: none">
+                {{!-- <legend><strong>Add People</strong></legend> --}}
+                <p id = "center">To add a new person, please enter their information below and click 'Submit'!</p>
+                <form id="addPeople" method="POST" action="/addPeople" class="center-Margin">
+                    <fieldset class="fields">
+                        <label>* Person Name </label>
+                            <input type="text" name="peopleName" id="peopleNameInsert" style="margin-bottom: 10px" required>
+                        <br>
+
+                        <label> Affiliation </label> 
+                            <!-- Dynamic dropdown for Affiliations--> 
+                            <select name="affiliationID" id="affiliationIDInsert">
+                                <option value=""></option>
+                                {{#each Affiliations}}
+                                <option value="{{this.affiliationID}}">{{this.affiliationType}}</option>
+                                {{/each}}
+                            </select>
+                    </fieldset>
+                    
+                    <p id="center">
+                        <a href="/people" class="cancel-button">Cancel</a>
+                        <input type="submit">
+                    </p>
+                </form>
+            </div>
+
+            {{!-- Form to update a record on the table  --}}
+            <div id="update" style="display: none">
+                {{!-- <legend id = "center"><strong>Update People</strong></legend> --}}
+                <p id = "center">Update a Person entry. </p>
+                <form id="updatePeople"  method="POST" action="/updatePeople" class="center-Margin">
+                    <input type="hidden" name="peopleID" id="peopleIDUpdate"> <br>
+                    <fieldset class="fields">
+                        <label>* Person Name: </label> 
+                        <input type="text" name="peopleName" id="peopleNameUpdate" style="margin-bottom: 10px" required>
+                        <br>
+
+                        <!-- Dynamic dropdown for Affiliations-->
+                        <label>Affiliation:</label>
+                            <select name="affiliationID" id="affiliationIDUpdate" style="margin-bottom: 10px">
+                                <option value=""></option>
+                                {{#each Affiliations}}
+                                <option value="{{this.affiliationID}}">{{this.affiliationType}}</option>
+                                {{/each}}
+                            </select>
+                    </fieldset>
+
+                    <p id="center">
+                        <a href="/people" class="cancel-button">Cancel</a>
+                        <input type="submit">
+                    </p>
+                </form>
+            </div>
+        </article>
+    </section>
+</main>

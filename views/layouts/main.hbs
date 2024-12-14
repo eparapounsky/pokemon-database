@@ -1,0 +1,87 @@
+{{!-- 
+Citations:
+Date: 11/16/2024
+Structure of main.hbs adapted from Step 3.
+Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+ --}}
+
+{{!-- 
+Citations:
+Date: 11/26/2024
+Source for favicon. 
+Source URL: https://www.deviantart.com/stupidrainbowstarmen/art/PokeBall-902519224
+--}}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+	<link rel="icon" type="image/png" href="./images/favicon.ico">
+    <title>Pokemon Management Database</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='./css/main.css'>
+    <meta />
+    <script language="JavaScript">
+		function showform(dowhat) {
+			/*
+			* four DIVS: browse, insert, update, delete
+			* this function sets one visible the others not
+			*/
+			if (dowhat == 'insert'){
+				document.getElementById('browse').style.display = 'none';
+				document.getElementById('insert').style.display = 'block';
+				document.getElementById('update').style.display = 'none';
+				document.getElementById('delete').style.display = 'none';
+			}
+			else if (dowhat == 'update'){
+				document.getElementById('browse').style.display = 'none';
+				document.getElementById('insert').style.display = 'none';
+				document.getElementById('update').style.display = 'block';
+				document.getElementById('delete').style.display = 'none';
+			}
+			else if (dowhat == 'delete'){
+				document.getElementById('browse').style.display = 'none';
+				document.getElementById('insert').style.display = 'none';
+				document.getElementById('update').style.display = 'none';
+				document.getElementById('delete').style.display = 'block';
+			}
+      		else if (dowhat == 'all'){
+				document.getElementById('browse').style.display = 'block';
+				document.getElementById('insert').style.display = 'block';
+				document.getElementById('update').style.display = 'block';
+				document.getElementById('delete').style.display = 'block';
+			}
+			else { //by default display browse
+				document.getElementById('browse').style.display = 'block';
+				document.getElementById('insert').style.display = 'none';
+				document.getElementById('update').style.display = 'none';
+				document.getElementById('delete').style.display = 'none';
+			}
+		}
+    </script>
+</head>
+
+<body>
+    <header>
+        <h1>Pokemon Management System Database</h1>
+    </header>
+
+    <nav>
+        <a href="/" >Home</a>
+        <a href="pokemon">Pokemon</a>
+        <a href="people">People</a>
+        <a href="affiliations">Affiliations</a>
+        <a href="types">Types</a>
+        <a href="battles">Battles</a>
+        <br><br>
+        <a href="pokemontypes">Pokemon Types</a>
+        <a href="pokemonpeople">Owned Pokemon</a>
+        <a href="peoplebattles">Player Battles</a>
+     </nav>
+
+    {{{body}}}
+</body>
+
+<footer>© 2024 - Elena Parapounsky & Amy Xu</footer> 
+</html>

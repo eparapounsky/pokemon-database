@@ -1,0 +1,137 @@
+{{!-- 
+Citations:
+Date: 11/21/2024
+Structure of affiliations.hbs code is from Step 4.
+Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+--}}
+
+{{!-- 
+Citations:
+Date: 11/21/2024
+Dynamically populated data for affiliations.hbs adapted from Step 6.
+Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+ --}}
+
+{{!-- 
+Citations:
+Date: 11/21/2024
+Dynamically updating and deleting data for affiliations.hbs adapted from Steps 7 and 8.
+Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+ --}}
+
+<script language = "JavaScript">
+    function newAffiliation() { showform('insert'); }
+    function updateAffiliation(affiliations) {
+        // Fills in form with data from selected row
+        document.getElementById("affiliationIDUpdate").value = affiliations.affiliationID;
+        document.getElementById("affiliationTypeUpdate").value = affiliations.affiliationType;
+        document.getElementById("affiliationRankUpdate").value = affiliations.affiliationRank;
+        document.getElementById("typeDescriptionUpdate").value = affiliations.typeDescription;
+        showform('update'); }
+    function showAll() { showform ('all'); }
+    function browseAffiliations() { showform ('browse'); }
+</script>
+
+
+<main>{{!-- Create a table --}}
+    <section>  
+        <h2>Affiliations</h2>
+        <article id = "affiliations">
+            <p id = "center">
+                Affiliations and ranks of people. 
+            </p>
+
+            {{!-- Search function --}}
+            <form id="search-affiliations-html" method='GET' action='/affiliations' class="center-Margin">
+                <input type="text" name="affiliationsSearch" id="affiliationsSearch" placeholder="Search the table:">
+                <input type="submit">
+                <a href='/affiliations'><button>Reset</button></a>
+            </form>
+
+            <div id="browse">
+                <p id = "center">
+                    <a href="#" class="new-entry" onClick="newAffiliation()">Add a new Affiliation</a>
+                </p>
+
+                <table border="1" cellpadding="5" id="affiliations-table" class="center-Margin">
+                    {{!-- Header section --}}
+                    <thead>
+                        <tr>
+                            <th>Affiliation ID</th>
+                            <th>Affiliation Type</th>
+                            <th>Affiliation Rank</th>
+                            <th>Type Description</th>
+                            <th>Edit Entry</th>
+                            <th>Delete Entry</th>
+                        </tr>
+                    </thead>
+
+                    {{!-- Body section --}}
+                    <tbody>
+                        {{!-- For each row, print each attribute --}}
+                        {{#each data}}
+                        <tr data-value={{this.affiliationID}}>
+                            <td>{{this.affiliationID}}</td>
+                            <td>{{this.affiliationType}}</td>
+                            <td>{{this.affiliationRank}}</td>
+                            <td>{{this.typeDescription}}</td>
+                            <td><button onclick="updateAffiliation({affiliationID: {{this.affiliationID}}, affiliationType: '{{this.affiliationType}}', affiliationRank:  '{{this.affiliationRank}}', typeDescription: '{{this.typeDescription}}'})">Edit</button></td>
+                            <td><button onclick="deleteAffiliation({{this.affiliationID}})">Delete</button></td>
+                        </tr>
+                        {{/each}}
+                    </tbody> 
+                </table>
+                <script src="./js/deleteAffiliations.js"></script>
+            </div>
+
+            {{!-- Form to add a record to the table  --}}
+            <div id="insert" style="display: none">
+                {{!-- <legend><strong>Add Affiliations</strong></legend> --}}
+                <p id = "center">To add a new affiliation, please enter its details below and click 'Submit'!</p>
+
+                <form id="addAffiliations" method="POST" action="/addAffiliations" class="center-Margin">
+                    <fieldset class="fields">
+                        <label>* Affiliation Type </label>
+                            <input type="text" name="affiliationType" style="margin-bottom: 10px" required>
+                        <br>
+                        <label>* Affiliation Rank</label>
+                            <input type="text" name="affiliationRank" style="margin-bottom: 10px" required> 
+                        <br>
+                        <label> Type Description</label>
+                            <input type="text" name="typeDescription" style="margin-bottom: 10px"> 
+                    </fieldset>
+
+                    <p id="center">
+                        <a href="/affiliations" class="cancel-button">Cancel</a>
+                        <input type="submit">
+                    </p>
+                </form>
+            </div>
+
+            {{!-- Form to update a record on the table  --}}
+            <div id="update" style="display: none">
+                {{!-- <legend><strong>Update Affiliations</strong></legend> --}}
+                <p id = "center">Update an Affiliation entry. </p>
+                <form id="updateAffiliations"  method="POST" action="/updateAffiliations" class="center-Margin">
+                    <fieldset class="fields">
+                        <input type="hidden" name="affiliationID" id="affiliationIDUpdate"> <br>
+                        <label>* Affiliation Type: </label> 
+                            <input type="text" name="affiliationType" id="affiliationTypeUpdate" style="margin-bottom: 10px" required>
+                        <br>
+                        <label>* Affiliation Rank: </label> 
+                            <input type="text" name="affiliationRank" id="affiliationRankUpdate" style="margin-bottom: 10px" required>
+                        <br>
+                        <label> Type Description: </label> 
+                            <input type="text" name="typeDescription" id="typeDescriptionUpdate" style="margin-bottom: 10px">
+                        <br>
+                    </fieldset>
+
+                    <p id="center">
+                        <a href="/affiliations" class="cancel-button">Cancel</a>
+                        <input type="submit">
+                    </p>
+                </form>
+            </div>
+        </article>
+    </section>
+</main>

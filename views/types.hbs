@@ -1,0 +1,139 @@
+{{!-- 
+Citations:
+Date: 11/26/2024
+Structure of types.hbs code is from Step 4.
+Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+--}}
+
+{{!-- 
+Citations:
+Date: 11/26/2024
+Dynamically populated data for types.hbs adapted from Step 6.
+Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+ --}}
+
+{{!-- 
+Citations:
+Date: 11/246/2024
+Dynamically updating and deleting data for types.hbs adapted from Steps 7 and 8.
+Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+ --}}
+
+<script language = "JavaScript">
+    function newForm() { showform('insert'); }
+    function updateForm(type) {
+
+        // Fills in form with data from selected row
+        document.getElementById("typeIDUpdate").value = type.typeID;
+        document.getElementById("typeNameUpdate").value = type.typeName;
+        document.getElementById("weakAgainstUpdate").value = type.weakAgainst;
+        document.getElementById("strongAgainstUpdate").value = type.strongAgainst;
+        showform('update'); }
+    function showAll() { showform ('all'); }
+    function browseForm() { showform ('browse'); }
+</script>
+
+<main>{{!-- Create a table --}}
+    <section>  
+    <h2>Types</h2>
+    <article id = "types">
+        <p id = "center">
+           Categories of Pokemon types.
+        </p>
+
+        {{!-- Search function --}}
+        <form id="search-types-html" method='GET' action='/types' class="center-Margin">
+            <input type="text" name="typesSearch" id="typesSearch" placeholder="Search the table:">
+            <input type="submit">
+            <a href='/types'><button>Reset</button></a>
+        </form>
+
+        <div id="browse">
+        <p id = "center">
+            <a href="#" class="new-entry" onClick="newForm()">Add a New Pokemon Type</a>
+        </p>
+        <table border="1" cellpadding="5" id="types-table" class="center-Margin">
+
+            {{!-- Header section --}}
+            <thead>
+
+                {{!-- For just the first row, we print each key of the row object as a header cell so we
+                know what each column means when the page renders --}}
+                <tr>
+                    <th>Type ID</th>
+                    <th>Type Name</th>
+                    <th>Weak Against</th>
+                    <th>Strong Against</th>
+                    <th>Edit Entry</th>
+                    <th>Delete Entry</th>
+                </tr>
+            </thead>
+
+            {{!-- Body section --}}
+            <tbody>
+                {{!-- For each row, print each attribute --}}
+                {{#each data}}
+                <tr data-value={{this.typeID}}>
+                    <td>{{this.typeID}}</td>
+                    <td>{{this.typeName}}</td>
+                    <td>{{this.weakAgainst}}</td>
+                    <td>{{this.strongAgainst}}</td>
+                    {{!-- updatePokemon will take object with each attribute to prefill update form --}}
+                    {{!-- Tried to send {{this}} but could not get it working in the JavaScript --}}
+                    <td><button onclick="updateForm({typeID: {{this.typeID}}, typeName: '{{this.typeName}}', weakAgainst: '{{this.weakAgainst}}', strongAgainst: '{{this.strongAgainst}}' })">Edit</button></td>
+                    <td><button onclick="deleteType({{this.typeID}})">Delete</button></td>
+                </tr>
+                {{/each}}
+            </tbody> 
+        </table>
+        <script src="./js/deleteTypes.js"></script>
+        </div>
+
+        {{!-- Form to add a record to the table  --}}
+        <div id="insert" style="display: none">
+        {{!-- <legend><strong>Add a Type</strong></legend> --}}
+        <p id = "center">To add a Type, please enter the information below and click 'Submit'!</p>
+        <form id="addForm" method="POST" action="/addType" class="center-Margin">
+
+            <fieldset class="fields">
+                <label>* Type Name </label><input type="text" name="typeName" style="margin-bottom: 10px" required>
+                <br>
+                <label>* Weak Against </label><input type="text" name="weakAgainst" style="margin-bottom: 10px" required>
+                <br>
+                <label>* Strong Against </label><input type="text" name="strongAgainst" style="margin-bottom: 10px" required>
+                <br>
+            </fieldset>
+            <p id="center">
+                <button type="button" onClick="browseForm()">Cancel</button>
+                <input type="submit">
+            </p>
+
+        </form>
+
+        </div>
+
+        {{!-- Form to update a record to the table  --}}
+        <div id="update" style="display: none">
+        {{!-- <legend><strong>Update Type
+        </strong></legend> --}}
+        <p id = "center">Update a Type entry. </p>
+        <form id="updateType"  method="POST" action="/updateType" class="center-Margin">
+        <input type="hidden" name="typeID" id="typeIDUpdate"> <br>
+            <fieldset class="fields">
+                <label>* Type Name </label><input type="text" name="typeName" id="typeNameUpdate" style="margin-bottom: 10px" required>
+                <br>
+                <label>* Weak Against </label><input type="text" name="weakAgainst" id="weakAgainstUpdate" style="margin-bottom: 10px" required>
+                <br>
+                <label>* Strong Against </label><input type="text" name="strongAgainst" id="strongAgainstUpdate" style="margin-bottom: 10px" required>
+                <br>
+            </fieldset>    
+            <p id="center">
+                <button type="button" onClick="browseForm()">Cancel</button>
+                <input type="submit">
+            </p>
+        </form>
+        </div>
+
+</article>
+</section>
+</main>

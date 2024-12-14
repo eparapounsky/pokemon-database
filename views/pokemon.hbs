@@ -1,0 +1,170 @@
+{{!-- 
+Citations:
+Date: 11/16/2024
+Structure of pokemon.hbs code is from Step 4.
+Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+--}}
+
+{{!-- 
+Citations:
+Date: 11/16/2024
+Dynamically populated data for pokemon.hbs adapted from Step 6.
+Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+ --}}
+
+{{!-- 
+Citations:
+Date: 11/16/2024
+Dynamically updating and deleting data for pokemon.hbs adapted from Steps 7 and 8.
+Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+ --}}
+
+{{!-- 
+Citations:
+Date: 11/27/2024
+Adapted if statement to render 0s and 1s in isBaby column as True/False in Pokemon table.
+Source URL: https://stackoverflow.com/questions/10736907/handlebars-js-else-if
+ --}}
+
+{{!-- 
+Citations:
+Date: 11/27/2024
+Adapted eq comparison helper to help with conditional rendering of isBaby in Pokemon table.
+Source URL: https://www.brightspot.com/documentation/brightspot-cms-developer-guide/latest/helpers#:~:text=in%20standard%20Handlebars.-,Comparison%20helpers,-%7B%7Beq%7D%7D
+ --}}
+
+<script language = "JavaScript">
+    function newPokemon() { showform('insert'); }
+    function updatePokemon(pokemon) {
+        // Fills in form with data from selected row
+        document.getElementById("pokeIDUpdate").value = pokemon.pokeID;
+        document.getElementById("pokeNameUpdate").value = pokemon.pokeName;
+        document.getElementById("isBabyUpdate").value = pokemon.isBaby;
+        document.getElementById("pokeRarityUpdate").value = pokemon.pokeRarity;
+        showform('update'); }
+    function showAll() { showform ('all'); }
+    function browsePokemon() { showform ('browse'); }
+</script>
+
+
+<main>{{!-- Create a table --}}
+    <section>  
+        <h2>Pokemon</h2>
+        <article id = "pokemon">
+            <p id = "center">
+                List of known Pokemon. 
+            </p>
+
+            {{!-- Search function --}}
+            <form id="search-pokemon-html" method='GET' action='/pokemon' class="center-Margin">
+                <input type="text" name="pokemonSearch" id="pokemonSearch" placeholder="Search the table:">
+                <input type="submit">
+                <a href='/pokemon'><button>Reset</button></a>
+            </form>
+
+            <div id="browse">
+            <p id = "center">
+                <a href="#" class="new-entry" onClick="newPokemon()">Add a new Pokemon</a>
+            </p>
+            <table border="1" cellpadding="5" id="pokemon-table" class="center-Margin">
+                {{!-- Header section --}}
+                <thead>
+                    {{!-- For just the first row, we print each key of the row object as a header cell so we
+                    know what each column means when the page renders --}}
+                    <tr>
+                        <th>Pokemon ID</th>
+                        <th>Pokemon Name</th>
+                        <th>Is Baby?</th>
+                        <th>Pokemon </th>
+                        <th>Edit Entry</th>
+                        <th>Delete Entry</th>
+                    </tr>
+                </thead>
+
+                {{!-- Body section --}}
+                <tbody>
+                    {{!-- For each row, print each attribute --}}
+                    {{#each data}}
+                    <tr data-value={{this.pokeID}}>
+                        <td>{{this.pokeID}}</td>
+                        <td>{{this.pokeName}}</td>
+                        {{!-- <td>{{this.isBaby}}</td> --}}
+                        <td>{{#if (eq this.isBaby 1)}}True{{else}}False{{/if}}</td> <!-- if isBaby is 1, display 'True; else, display 'False'-->
+                        <td>{{this.pokeRarity}}</td>
+                        {{!-- updatePokemon will take object with each attribute to prefill update form --}}
+                        {{!-- Tried to send {{this}} but could not get it working in the JavaScript --}}
+                        <td><button onclick="updatePokemon({pokeID: {{this.pokeID}}, pokeName: '{{this.pokeName}}', isBaby:  {{this.isBaby}}, pokeRarity: '{{this.pokeRarity}}'})">Edit</button></td>
+                        <td><button onclick="deletePokemon({{this.pokeID}})">Delete</button></td>
+                    </tr>
+                    {{/each}}
+                </tbody> 
+            </table>
+            <script src="./js/deletePokemon.js"></script>
+            </div>
+
+            {{!-- Form to add a record to the table  --}}
+            <div id="insert" style="display: none">
+                {{!-- <legend><strong>Add Pokemon</strong></legend> --}}
+                <p id = "center">To add a new Pokemon, please enter their information below and click 'Submit'!</p>
+                <form id="addPokemon" method="POST" action="/addPokemon" class="center-Margin">
+
+                    <fieldset class="fields">
+                        <label>* Pokemon Name </label><input type="text" name="pokeName" style="margin-bottom: 10px" required>
+                        <br>
+                        <label>* Is it a baby Pokemon? </label> <select name="isBaby" style="margin-bottom: 10px" required>
+                            <option value="" disabled selected></option>
+                            <option value="1">True</option>
+                            <option value="0">False</option>
+                            </select>
+                        <br>
+                        <label>* Rarity </label> <select name="pokeRarity" style="margin-bottom: 10px" required>
+                            <option value="" disabled selected></option>
+                            <option value="Common">Common</option>
+                            <option value="Rare">Rare</option>
+                            <option value="Legendary">Legendary</option>
+                            <option value="Mythical">Mythical</option>
+                            </select>
+                    </fieldset>
+
+                    <p id="center">
+                        <a href="/pokemon" class="cancel-button">Cancel</a>
+                        <input type="submit">
+                    </p>
+                </form>
+            </div>
+
+            {{!-- Form to update a record to the table  --}}
+            <div id="update" style="display: none">
+                {{!-- <legend><strong>Update Pokemon</strong></legend> --}}
+                <p id = "center">Update a Pokemon entry. </p>
+                <form id="updatePokemon"  method="POST" action="/updatePokemon" class="center-Margin">
+                    <input type="hidden" name="pokeID" id="pokeIDUpdate"> 
+                    <br>
+
+                    <fieldset class="fields">
+                        <label>* Pokemon Name: </label> <input type="text" name="pokeName" id="pokeNameUpdate" style="margin-bottom: 10px" required>
+                        <br>
+                        <label>* Is it a baby Pokemon?  </label>  <select name="isBaby" id="isBabyUpdate" style="margin-bottom: 10px" required>
+                            <option value="{{this.isBaby}}">{{this.isBaby}}</option>
+                            <option value="0">False</option>
+                            <option value="1">True</option>
+                            </select>
+                        <br>
+                        <label>* Rarity </label> <select name="pokeRarity" id="pokeRarityUpdate" style="margin-bottom: 10px" required>
+                            <option value="{{this.pokeRarity}}">{{this.pokeRarity}}</option>
+                            <option value="Common">Common</option>
+                            <option value="Rare">Rare</option>
+                            <option value="Legendary">Legendary</option>
+                            <option value="Mythical">Mythical</option>
+                            </select>
+                    </fieldset>
+
+                    <p id="center">
+                        <a href="/pokemon" class="cancel-button">Cancel</a>
+                        <input type="submit">
+                    </p>
+                </form>
+            </div>
+        </article>
+    </section>
+</main>
