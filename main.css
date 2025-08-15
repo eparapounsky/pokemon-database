@@ -1,438 +1,385 @@
 /*  ===== MOBILE styles (reside at the top and are inherited by all devices) ===== */
 /*  ===== See tablet, desktop, and print @media queries at the bottom. */
 
-
 /*   ----- Imports  -----  */
-  /* Add fonts from the app's server 
+/* Add fonts from the app's server 
     @font-face {                
       font-family: 'Albert Sans', sans-serif;
       font-family: 'Figtree', sans-serif;
     } */
-  /*  ...or hosted services like Google Fonts */
-  @import url('https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400&family=Figtree:wght@400&family=Gentium+Plus&display=swap');
-  @import url('https://fonts.googleapis.com/css2?family=Hachi+Maru+Pop&family=Sansita+Swashed&display=swap');
-  /* npm install modern-normalize 
+/*  ...or hosted services like Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400&family=Figtree:wght@400&family=Gentium+Plus&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Hachi+Maru+Pop&family=Sansita+Swashed&display=swap");
+/* npm install modern-normalize 
     Resets elements for browser consistency.  
     http://nicolasgallagher.com/about-normalize-css/ 
     @import '../node_modules/modern-normalize/modern-normalize.css'; 
-  */          
-  
-  /* Component-specific stylesheets, if any. 
+  */
+
+/* Component-specific stylesheets, if any. 
     @import "component1.css";   
   */
 
 /*   ----- Variables  -----  */
 :root {
-    --color-viridian: #40826D;
-    --color-viridian-darker: #236a56;
-    --color-viridian-darker-alpha: #236a5630;
-    --color-viridian-alpha: #40826D70;
-    --color-viridian-dark: #132720;
-    --color-viridian-dark-alpha: #13272095;
-    --color-viridian-light: #C5D9D3;
-    --color-viridian-less-light: #8CB4A7;
-    --color-viridian-less-light-alpha: #8CB4A750;
-    --color-viridian-less-light-alpha2: #8CB4A730;
-    --color-blue: #63B0E0; 
-    --color-blue-dark: #3B6986; 
-    --color-blue-light: #B1D7EF; 
-    --color-red: #fc031c;
-  }
-  
-  /*  ----- Viewport ----- elements inherited by all remaining elements ----- */
-  body {       /* Can alternatively define in html {} or :root {} */
+  --color-viridian: #40826d;
+  --color-viridian-darker: #236a56;
+  --color-viridian-darker-alpha: #236a5630;
+  --color-viridian-alpha: #40826d70;
+  --color-viridian-dark: #132720;
+  --color-viridian-dark-alpha: #13272095;
+  --color-viridian-light: #c5d9d3;
+  --color-viridian-less-light: #8cb4a7;
+  --color-viridian-less-light-alpha: #8cb4a750;
+  --color-viridian-less-light-alpha2: #8cb4a730;
+  --color-blue: #63b0e0;
+  --color-blue-dark: #3b6986;
+  --color-blue-light: #b1d7ef;
+  --color-red: #fc031c;
+}
+
+/*  ----- Viewport ----- elements inherited by all remaining elements ----- */
+body {
+  /* Can alternatively define in html {} or :root {} */
   background-color: var(--color-viridian-dark);
   background-image: url(images/Banff-Mountain-Lake-2022-Background.jpg);
   background-attachment: fixed;
   background-position: top left;
   background-repeat: no-repeat;
-  background-size: cover; 
+  background-size: cover;
   color: var(--color-viridian-light);
-  font-family: 'Gentium Plus', serif; /* Define with at least one font name and its related generic family name.*/
+  font-family: "Gentium Plus", serif;
+  /* Define with at least one font name and its related generic family name.*/
   margin: 0px;
   padding: 5px;
   max-width: 95%;
   margin-left: auto;
   margin-right: auto;
-  }
-  
-  /*  ----- Page layout blocks -----  */
-  header {
-    font-family: 'Hachi Maru Pop', cursive;
-    color: var(--color-blue-light);
-    padding: 5px;
-    padding-bottom: 60px;
-    background-color: var(--color-viridian-darker);
-
-  }
-  main {
-    border: 2px dashed var(--color-viridian-dark-alpha);
-    border-top: none;
-    border-bottom: none;
-    background-color: var(--color-viridian-less-light-alpha);
-  }
-  section {
-    padding: 10px 0px 10px 0px;
-  }
-    article {
-      padding-left: 10px;
-      background-color: var(--color-viridian-dark-alpha);
-      border: 1.5px solid var(--color-viridian-dark-alpha);
-      border-bottom: 1.5px solid var(--color-viridian-darker);
-      border-radius: 10px 10px 10px 10px; 
-      margin-bottom: 5px;
-    }
-      #about-web-servers {}
-      #frontend-design {}
-
-  div{}
-  aside {}
-  footer {
-    color: var(--color-blue-light);
-    background-color: var(--color-viridian-darker);
-    padding: 5px;
-    padding-left: 45px;
-  }
-  
-  /* ----- Anchors ----- Text links */
-  a {
-    color: var(--color-blue); /* light blue link color */
-    text-decoration: none; /* remove underline */
-  }
-  a:link {}
-  a:hover {
-    color: var(--color-viridian-less-light); /* change color with hover */
-  }
-  a:active {}
-  a:visited {}
-  
-  /*  ----- Navigation ----- Override text links for navigation only.  */
-
-
-  .web-dev-concepts {
-    text-align: center;
-    color: var(--color-viridian);
-  }
-  .web-dev-concepts a{
-    color: var(--color-viridian);
-  }
-  .web-dev-concepts a:hover{
-    color: var(--color-viridian-dark)
-  }
-  .web-dev-concepts a:visited{
-    color: var(--color-blue-dark)
-  }
-
-  nav:not(.web-dev-concepts){
-    position: relative;
-    display: inline-block;
-    top: -70px;
-    left: 50px;
-    font-family: 'Figtree', sans-serif;
-    text-decoration: none;
-  }
-  nav:not(.web-dev-concepts) a {
-    background-color: var(--color-blue-dark);
-    border: 1.5px solid var(--color-blue);
-    border-radius: 3px 3px 3px 3px; 
-    color: var(--color-blue-light);
-    font-weight:bold;
-    margin-right:3px;
-    padding: 3px 15px 3px 15px;
-    text-decoration:none;
-  }
-  nav:not(.web-dev-concepts) a:hover {
-    background-color: var(--color-blue-light);
-    color:var(--color-blue);
-    text-decoration: none;
-  }
-
-
-  
-  /*  -----  Typography  ----- */  
-
-  p {        
-    padding-left: 20px;
-  }
-  #center{
-    text-align: center;
-  }
-  #center-dark{
-    color: var(--color-viridian-dark);
-    text-align: center;
-  }
-  #centerMargin{
-    margin-left: auto;
-    margin-right: auto;
-  }
-  br {}
-  ol, ul, dl {}
-  li {}
-  dt, dd {    
-    padding-left: 30px;
-  }
-  
-  h3, h4, h5, h6 {
-    font-family: 'Figtree', sans-serif; 
-  } 
-  h1 {
-    padding-left: 50px;
-  }
-  h2 {
-    color: var(--color-viridian);
-    text-align: center;
-    font-weight:bold; 
-    font-size: 30px;
-    font-family: 'Albert Sans', sans-serif;
-    padding: 25px 0px 5px 0px;
-    margin-top: 0px;
-  }
-  h3 {
-    color: var(--color-viridian-less-light);
-    font-weight: bold;
-    font-size: 18px;
-  }
-  h4 {}
-  h5 {}
-  h6 {}
-  
-  abbr {}
-  acronym {}
-  address {}
-  blockquote {}
-    q {}
-    cite {}
-  em {}
-  hr {}
-  mark {}
-  s {}
-  span {}
-  strong {}
-  sub {}
-  sup {}
-  time {}
-  
-  /*  ----- Coding or instructional typography ----- */
-  pre {}
-  code {}
-  kbd {}
-  samp {}
-  var {}
-  del {} 
-  ins {}
-  
-  /*  ----- Table ----- */
-  table {
-    background-color: var(--color-viridian-dark-alpha);
-    border: 2px solid var(--color-viridian-darker);
-    border-top: none;
-    margin: 20px;
-  }
-  caption {
-    border: 2px solid var(--color-viridian-darker);
-    background-color: var(--color-viridian-dark-alpha);
-    font-weight: bold;
-  }
-  thead {    
-
-  }
-  tbody {
-  }
-  tfoot {}
-  tr {    
-
-  }
-    tr:nth-child(even) {    
 }
-  th {
-    border-bottom: 1px outset var(--color-viridian-darker);
-    padding: 5px 25px 5px 25px;
-  }
-  td {
-    border-bottom: 1px outset var(--color-viridian-darker);    
-    padding: 5px 25px 5px 25px;
-    margin: 5px;
-  }
-  #staffTable th{
-    border: 1px outset var(--color-viridian-darker);
-    padding: 25px;
-  }
-  #staffTable td{
-    border: 1px outset var(--color-viridian-darker);
-    padding: 25px;
-  }
-  #staffTable tr:nth-child(even) {    
-    background-color: var(--color-viridian-less-light-alpha2);
-  }
-  #staffTable tr:nth-child(odd) {    
-    background-color: var(--color-viridian-darker-alpha);
-  }
-    td:nth-child(1) {}
-  colgroup {}
-  data {}
-  datalist {}
-  
-  
-  /*  ----- Form ----- */
-  form, input, select, textarea{
-    font-family: 'Gentium Plus', serif;
-  }
-  form {    
 
-  }
-  fieldset {
-    border: 1px solid var(--color-viridian-dark);
-    background-color: var(--color-viridian-dark-alpha);
-    margin-bottom: 15px;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-  }
-  legend {
-    background-color: var(--color-viridian-dark);
-    color: var(--color-viridian-less-light);
-  }
-  label{
-    font-family: 'Albert Sans', sans-serif;
-    margin-top: 5px;
-    font-size: 90%;
-    color: var(--color-viridian-light);
-  }
-  label.block{
-    display: block;
-  }
-  label.required:after{
-    color: var(--color-red); 
-    content:" *";
-  }
-  *.required{
-    font-weight: bold;
-  }
-  button {
-    background-color: var(--color-blue-dark);
-    border: 1px solid var(--color-blue-light);
-    border-radius: 3px 3px 3px 3px; 
-    color: var(--color-blue-light);
-    font-family: 'Figtree', sans-serif;
-    font-size: 140%;
-    text-align: center;
-    justify-content: center;
-  }
-  button:hover {
-    background-color: var(--color-blue-light);
-    border: 1px solid var(--color-blue-dark);
-    border-radius: 3px 3px 3px 3px; 
-    color: var(--color-blue-dark);
-    font-family: 'Figtree', sans-serif;
-    font-size: 140%;
-    text-align: center;
-    justify-content: center;
-  }
-  input{
-    color: var(--color-viridian-dark-alpha);
-    border: 1px dashed var(--color-viridian-dark);
-/*    padding-bottom: 10px;
-    margin-bottom: 20px; */
-    font-size: 110%;
-  }
-  input::placeholder {
-    color: var(--color-viridian-less-light);
-    font-size: 110%;
-  }
-    input:focus{
-      color: var(--color-viridian-dark);
-      border: 2px solid var(--color-viridian);
-    }
-    input:invalid {
-      border-bottom: 2px solid var(--color-red);
-    }
-    output {}
-    meter {}
-    progress {}
-    select {}
-      optgroup {}
-      option {}
-    textarea {      
-      padding: 2px; 
-      color: var(--color-viridian-less-light);
-      border: 1px dashed var(--color-viridian-dark);
-      font-size: 110%;
-    }
-    textarea::placeholder {
-      color: var(--color-viridian-light);
-      font-size: 110%;
-  }
-    textarea:focus{
-      color: var(--color-viridian-dark);
-      border: 1px solid var(--color-viridian);
-    }
-    textarea:invalid {
-      border: 1px solid var(--color-red);
-    }
-  
-  /* ----- Media ----- */
-  .gallery { 
-    display: flex;
-    flex-flow: row wrap;
-  }
-  .gallery figure {
-    width: 600px;
-    margin: .75%;
-    padding: 0;
-    border: 1px solid var(--color-viridian-dark);
-    background-color: var(--color-viridian-dark-alpha);
-  }
-  .gallery img {
-    width: 100%;
-  }
-  .gallery figcaption {
-    display: block;
-    padding: 5px;
-  }
-  figure {}
-    figcaption {}
-    figure img {}
-  svg {}
-  picture {}
-    source {}
-  iframe {}
-  video {}
-  audio {}
-  embed {}
-  object {}
-  
-  /*  ----- Classes for alignment, positioning, widths, grids, embellishments, and animation -----  */
-  .gallery {}
-  
-  .floatright {}
-  .floatleft {}
-  .center-middle {}
-  
-  .ten {}
-  .twenty {}
-  .thirty {}
-  .forty {}
-  .fifty {}
-  .sixty {}
-  .seventy {}
-  .eighty {}
-  
-  .radius {}
-  .circle {}
-  .boxshadow {}
-  .tshadow {} 
-  .gradient {}
-  .shape {}
-  
-  @keyframes App-logo {}
-  
-  /*   ===== TABLET  media query overrides mobile styles ===== */
-  @media all and (min-width: 600px) {}
-  
-  /*   ===== DESKTOP  media query overrides mobile and tablet styles ===== */
-  @media all and (min-width: 1080px) {}
-  
-  /*   ===== PRINT  media query overrides previous styles =====  */
-  @media print {}
-  
+/*  ----- Page layout blocks -----  */
+header {
+  font-family: "Hachi Maru Pop", cursive;
+  color: var(--color-blue-light);
+  padding: 5px;
+  padding-bottom: 60px;
+  background-color: var(--color-viridian-darker);
+}
+
+main {
+  border: 2px dashed var(--color-viridian-dark-alpha);
+  border-top: none;
+  border-bottom: none;
+  background-color: var(--color-viridian-less-light-alpha);
+}
+
+section {
+  padding: 10px 0px 10px 0px;
+}
+
+article {
+  padding-left: 10px;
+  background-color: var(--color-viridian-dark-alpha);
+  border: 1.5px solid var(--color-viridian-dark-alpha);
+  border-bottom: 1.5px solid var(--color-viridian-darker);
+  border-radius: 10px 10px 10px 10px;
+  margin-bottom: 5px;
+}
+
+footer {
+  color: var(--color-blue-light);
+  background-color: var(--color-viridian-darker);
+  padding: 5px;
+  padding-left: 45px;
+}
+
+/* ----- Anchors ----- Text links */
+a {
+  color: var(--color-blue);
+  /* light blue link color */
+  text-decoration: none;
+  /* remove underline */
+}
+
+a:hover {
+  color: var(--color-viridian-less-light);
+}
+
+/*  ----- Navigation ----- Override text links for navigation only.  */
+.web-dev-concepts {
+  text-align: center;
+  color: var(--color-viridian);
+}
+
+.web-dev-concepts a {
+  color: var(--color-viridian);
+}
+
+.web-dev-concepts a:hover {
+  color: var(--color-viridian-dark);
+}
+
+.web-dev-concepts a:visited {
+  color: var(--color-blue-dark);
+}
+
+nav:not(.web-dev-concepts) {
+  position: relative;
+  display: inline-block;
+  top: -70px;
+  left: 50px;
+  font-family: "Figtree", sans-serif;
+  text-decoration: none;
+}
+
+nav:not(.web-dev-concepts) a {
+  background-color: var(--color-blue-dark);
+  border: 1.5px solid var(--color-blue);
+  border-radius: 3px 3px 3px 3px;
+  color: var(--color-blue-light);
+  font-weight: bold;
+  margin-right: 3px;
+  padding: 3px 15px 3px 15px;
+  text-decoration: none;
+}
+
+nav:not(.web-dev-concepts) a:hover {
+  background-color: var(--color-blue-light);
+  color: var(--color-blue);
+  text-decoration: none;
+}
+
+/*  -----  Typography  ----- */
+p {
+  padding-left: 20px;
+}
+
+#center {
+  text-align: center;
+}
+
+#center-dark {
+  color: var(--color-viridian-dark);
+  text-align: center;
+}
+
+#centerMargin {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+dt,
+dd {
+  padding-left: 30px;
+}
+
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Figtree", sans-serif;
+}
+
+h1 {
+  padding-left: 50px;
+}
+
+h2 {
+  color: var(--color-viridian);
+  text-align: center;
+  font-weight: bold;
+  font-size: 30px;
+  font-family: "Albert Sans", sans-serif;
+  padding: 25px 0px 5px 0px;
+  margin-top: 0px;
+}
+
+h3 {
+  color: var(--color-viridian-less-light);
+  font-weight: bold;
+  font-size: 18px;
+}
+
+/*  ----- Table ----- */
+table {
+  background-color: var(--color-viridian-dark-alpha);
+  border: 2px solid var(--color-viridian-darker);
+  border-top: none;
+  margin: 20px;
+}
+
+caption {
+  border: 2px solid var(--color-viridian-darker);
+  background-color: var(--color-viridian-dark-alpha);
+  font-weight: bold;
+}
+
+th {
+  border-bottom: 1px outset var(--color-viridian-darker);
+  padding: 5px 25px 5px 25px;
+}
+
+td {
+  border-bottom: 1px outset var(--color-viridian-darker);
+  padding: 5px 25px 5px 25px;
+  margin: 5px;
+}
+
+#staffTable th {
+  border: 1px outset var(--color-viridian-darker);
+  padding: 25px;
+}
+
+#staffTable td {
+  border: 1px outset var(--color-viridian-darker);
+  padding: 25px;
+}
+
+#staffTable tr:nth-child(even) {
+  background-color: var(--color-viridian-less-light-alpha2);
+}
+
+#staffTable tr:nth-child(odd) {
+  background-color: var(--color-viridian-darker-alpha);
+}
+
+/*  ----- Form ----- */
+form,
+input,
+select,
+textarea {
+  font-family: "Gentium Plus", serif;
+}
+
+fieldset {
+  border: 1px solid var(--color-viridian-dark);
+  background-color: var(--color-viridian-dark-alpha);
+  margin-bottom: 15px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+legend {
+  background-color: var(--color-viridian-dark);
+  color: var(--color-viridian-less-light);
+}
+
+label {
+  font-family: "Albert Sans", sans-serif;
+  margin-top: 5px;
+  font-size: 90%;
+  color: var(--color-viridian-light);
+}
+
+label.block {
+  display: block;
+}
+
+label.required:after {
+  color: var(--color-red);
+  content: " *";
+}
+
+*.required {
+  font-weight: bold;
+}
+
+button {
+  background-color: var(--color-blue-dark);
+  border: 1px solid var(--color-blue-light);
+  border-radius: 3px 3px 3px 3px;
+  color: var(--color-blue-light);
+  font-family: "Figtree", sans-serif;
+  font-size: 140%;
+  text-align: center;
+  justify-content: center;
+}
+
+button:hover {
+  background-color: var(--color-blue-light);
+  border: 1px solid var(--color-blue-dark);
+  border-radius: 3px 3px 3px 3px;
+  color: var(--color-blue-dark);
+  font-family: "Figtree", sans-serif;
+  font-size: 140%;
+  text-align: center;
+  justify-content: center;
+}
+
+input {
+  color: var(--color-viridian-dark-alpha);
+  border: 1px dashed var(--color-viridian-dark);
+  font-size: 110%;
+}
+
+input::placeholder {
+  color: var(--color-viridian-less-light);
+  font-size: 110%;
+}
+
+input:focus {
+  color: var(--color-viridian-dark);
+  border: 2px solid var(--color-viridian);
+}
+
+input:invalid {
+  border-bottom: 2px solid var(--color-red);
+}
+
+textarea {
+  padding: 2px;
+  color: var(--color-viridian-less-light);
+  border: 1px dashed var(--color-viridian-dark);
+  font-size: 110%;
+}
+
+textarea::placeholder {
+  color: var(--color-viridian-light);
+  font-size: 110%;
+}
+
+textarea:focus {
+  color: var(--color-viridian-dark);
+  border: 1px solid var(--color-viridian);
+}
+
+textarea:invalid {
+  border: 1px solid var(--color-red);
+}
+
+/* ----- Media ----- */
+.gallery {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.gallery figure {
+  width: 600px;
+  margin: 0.75%;
+  padding: 0;
+  border: 1px solid var(--color-viridian-dark);
+  background-color: var(--color-viridian-dark-alpha);
+}
+
+.gallery img {
+  width: 100%;
+}
+
+.gallery figcaption {
+  display: block;
+  padding: 5px;
+}
+
+/*  ----- Animation ----- */
+@keyframes App-logo {}
+
+/*   ===== TABLET  media query overrides mobile styles ===== */
+@media all and (min-width: 600px) {}
+
+/*   ===== DESKTOP  media query overrides mobile and tablet styles ===== */
+@media all and (min-width: 1080px) {}
+
+/*   ===== PRINT  media query overrides previous styles =====  */
+@media print {}
