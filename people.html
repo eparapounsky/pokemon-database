@@ -1,173 +1,178 @@
 <html>
+
 <head>
-<title>Pokemon Management Database - People</title>
-<link href="main.css" rel="stylesheet" type="text/css" />
-<script language="JavaScript">
-		function showform(dowhat) {
-			/*
-			* four DIVS: browse, insert, update, delete
-			* this function sets one visible the others not
-			*/
-			if (dowhat == 'insert'){
-				document.getElementById('browse').style.display = 'none';
-				document.getElementById('insert').style.display = 'block';
-				document.getElementById('update').style.display = 'none';
-				document.getElementById('delete').style.display = 'none';
-			}
-			else if (dowhat == 'update'){
-				document.getElementById('browse').style.display = 'none';
-				document.getElementById('insert').style.display = 'none';
-				document.getElementById('update').style.display = 'block';
-				document.getElementById('delete').style.display = 'none';
-			}
-			else if (dowhat == 'delete'){
-				document.getElementById('browse').style.display = 'none';
-				document.getElementById('insert').style.display = 'none';
-				document.getElementById('update').style.display = 'none';
-				document.getElementById('delete').style.display = 'block';
-			}
-      else if (dowhat == 'all'){
-				document.getElementById('browse').style.display = 'block';
-				document.getElementById('insert').style.display = 'block';
-				document.getElementById('update').style.display = 'block';
-				document.getElementById('delete').style.display = 'block';
-			}
-			else { //by default display browse
-				document.getElementById('browse').style.display = 'block';
-				document.getElementById('insert').style.display = 'none';
-				document.getElementById('update').style.display = 'none';
-				document.getElementById('delete').style.display = 'none';
-			}
-		}
+  <title>Pokemon Management Database - People</title>
+  <link href="main.css" rel="stylesheet" type="text/css" />
+  <script language="JavaScript">
+    function showform(dowhat) {
+      /*
+      * four DIVS: browse, insert, update, delete
+      * this function sets one visible the others not
+      */
+      if (dowhat == 'insert') {
+        document.getElementById('browse').style.display = 'none';
+        document.getElementById('insert').style.display = 'block';
+        document.getElementById('update').style.display = 'none';
+        document.getElementById('delete').style.display = 'none';
+      }
+      else if (dowhat == 'update') {
+        document.getElementById('browse').style.display = 'none';
+        document.getElementById('insert').style.display = 'none';
+        document.getElementById('update').style.display = 'block';
+        document.getElementById('delete').style.display = 'none';
+      }
+      else if (dowhat == 'delete') {
+        document.getElementById('browse').style.display = 'none';
+        document.getElementById('insert').style.display = 'none';
+        document.getElementById('update').style.display = 'none';
+        document.getElementById('delete').style.display = 'block';
+      }
+      else if (dowhat == 'all') {
+        document.getElementById('browse').style.display = 'block';
+        document.getElementById('insert').style.display = 'block';
+        document.getElementById('update').style.display = 'block';
+        document.getElementById('delete').style.display = 'block';
+      }
+      else { //by default display browse
+        document.getElementById('browse').style.display = 'block';
+        document.getElementById('insert').style.display = 'none';
+        document.getElementById('update').style.display = 'none';
+        document.getElementById('delete').style.display = 'none';
+      }
+    }
     function newPerson() { showform('insert'); }
     function updatePerson(peopleID) { showform('update'); }
-    function deletePerson(peopleID) { showform ('delete'); }
-    function showAll() { showform ('all'); }
-    function browsePerson() { showform ('browse'); }
-</script>
+    function deletePerson(peopleID) { showform('delete'); }
+    function showAll() { showform('all'); }
+    function browsePerson() { showform('browse'); }
+  </script>
 </head>
 
-<body>  
-    <header>
-        <h1>Pokemon Management System Database</h1>
-    </header>
-    <nav>
-        <a href="index.html" >Home</a>
-        <a href="pokemon.html">Pokemon</a>
-        <a href="people.html">People</a>
-        <a href="affiliations.html">Affiliations</a>
-        <a href="types.html">Types</a>
-        <a href="battles.html">Battles</a>
-        <br><br>
-        <a href="pokemontypes.html">Pokemon Types</a>
-        <a href="pokemonpeople.html">Owned Pokemon</a>
-        <a href="peoplebattles.html">Player Battles</a>
-     </nav>
-     <main>
-        <section>  
-            <h2>People</h2>
-            <article id = "people">
-                <p id = "center">
-                    List of people (Trainers, Gym Leaders, Team Rocket, Professors)
-                </p>
-                
-                <div id="browse">
-                    <p id = "center"><a href="#" onClick="showAll()">Display all forms</a> | <a href="#" onClick="browsePerson()">Hide forms</a><br>
-                      <a href="#" onClick="newPerson()">New</a>
-                    </p>
-                    <table border="1" cellpadding="5" id="centerMargin">
-                      <tr>
-                        <th>Person ID</th>
-                        <th>Person Name</th>
-                        <th> Person Affiliation</th>
-                        <th>Edit Entry</th>
-                        <th>Delete Entry</th>
-                      </tr>
-                      <tr>
-                        <td align="right">1</td>
-                        <td>Jessie</td>
-                        <td align="right">Team Rocket Agent</td>
-                        <td><a href="#" onClick="updatePerson('this.peopleID')">Edit</a></td>
-                        <td><a href="#" onclick="deletePerson('this.peopleID')">Delete</a></td>
-                      </tr>
-                      <tr>
-                        <td align="right">2</td>
-                        <td>Misty</td>
-                        <td align="right">Trainer Gym Leader</td>
-                        <td><a href="#" onClick="updatePerson('this.peopleID')">Edit</a></td>
-                        <td><a href="#" onclick="deletePerson('this.peopleID')">Delete</a></td>
-                      </tr>
-                      <tr>
-                        <td align="right">3</td>
-                        <td>Ash</td>
-                        <td align="right">Trainer Apprentice</td>
-                        <td><a href="#" onClick="updatePerson('this.peopleID')">Edit</a></td>
-                        <td><a href="#" onclick="deletePerson('this.peopleID')">Delete</a></td>
-                      </tr>
-                    </table>
-                    <p>&nbsp;</p>
-                    </div> <!-- browse -->
-                    
-                    <div id="insert" style="display: none">
-                        <form method="POST" id="addPerson">
-                            <legend><strong>Add Person</strong></legend>
-                              <fieldset class="fields">
-                                <label>* Name </label> <input type="text" name="peopleName" style="margin-bottom: 10px" required>
-                                <br>
-                                <label>* Affiliation </label> <select name="affiliation" style="margin-bottom: 10px" required>
-                                  <option value="0">&nbsp;</option>
-                                  <option value="1">Team Rocket Agent</option>
-                                  <option value="2">Trainer Gym Leader</option>
-                                  <option value="3">Trainer Apprentice</option>
-                                  </select>
-                                  <br>
-                              <button type="submit" id="addPerson">Add Person</button>
-                              <button type="button" onClick="browsePerson()">Cancel</button>
-                              </p>
-                            </form> 
-                    </div><!-- insert -->
-                    <p>&nbsp;</p>
-                    <div id="update" style="display: none">
-                        <form method="POST" id="updatePerson">
-                            <legend><strong>Update Person</strong></legend>
-                              <fieldset class="fields">
-                              <input type="hidden" name="peopleID" id="updatePersonID" style="margin-bottom: 10px" value="1">
-                                <label> ID#: </label>  1
-                                <br>
-                                <label> Name </label> <input type="text" name="peopleName" style="margin-bottom: 10px" value="Jessie">
-                                <br>
-                                <label> Affiliation  </label><select name="affiliation">
-                                  <option value="0">Team Rocket Agent</option>
-                                  <option value="1">Trainer Gym Leader</option>
-                                  <option value="2">Trainer Apprentice</option>
-                                  </select>
-                                  <br><br>
-                          </fieldset>
-                          <p id = "center">
-                              <button type="submit" id="UpdateSavePerson">Save Person Updates</button>
-                              <button type="button" onClick="browsePerson()">Cancel</button></p>
-                            </form> 
-                    </div><!-- update -->
-                    <p>&nbsp;</p>
-                    <div id="delete" style="display: none">
-                      <form method="POST" id="deletePerson">
-                          <legend><strong>Delete Person</strong></legend>
-                              <fieldset class="fields">
-                              <p>Are you sure you want to delete this Person from the database?</p>
-                              <input type="hidden" name="peopleID" id="deletePersonID" value="1">
-                              <label><strong>ID#: </strong></label> 1
-                              <br>
-                                <label> <strong>Name: </strong> </label> Jessie
-                                <br><br>
-                        </fieldset>
-                        <p id = "center">
-                          <button type="submit" id="deletePerson">Delete Person</button>
-                          <button type="button" onClick="browsePerson()">Cancel</button>
-                        </p>
-                            </form> 
-                    </div><!-- delete -->
-                   </article></section>
-                </main>
-<footer>© 2024 - Elena Parapounsky & Amy Xu</footer>    
-</body>    
+<body>
+  <header>
+    <h1>Pokemon Management System Database</h1>
+  </header>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="pokemon.html">Pokemon</a>
+    <a href="people.html">People</a>
+    <a href="affiliations.html">Affiliations</a>
+    <a href="types.html">Types</a>
+    <a href="battles.html">Battles</a>
+    <br><br>
+    <a href="pokemontypes.html">Pokemon Types</a>
+    <a href="pokemonpeople.html">Owned Pokemon</a>
+    <a href="peoplebattles.html">Player Battles</a>
+  </nav>
+  <main>
+    <section>
+      <h2>People</h2>
+      <article id="people">
+        <p id="center">
+          List of people (Trainers, Gym Leaders, Team Rocket, Professors)
+        </p>
+
+        <div id="browse">
+          <p id="center"><a href="#" onClick="showAll()">Display all forms</a> | <a href="#"
+              onClick="browsePerson()">Hide forms</a><br>
+            <a href="#" onClick="newPerson()">New</a>
+          </p>
+          <table border="1" cellpadding="5" id="centerMargin">
+            <tr>
+              <th>Person ID</th>
+              <th>Person Name</th>
+              <th> Person Affiliation</th>
+              <th>Edit Entry</th>
+              <th>Delete Entry</th>
+            </tr>
+            <tr>
+              <td align="right">1</td>
+              <td>Jessie</td>
+              <td align="right">Team Rocket Agent</td>
+              <td><a href="#" onClick="updatePerson('this.peopleID')">Edit</a></td>
+              <td><a href="#" onclick="deletePerson('this.peopleID')">Delete</a></td>
+            </tr>
+            <tr>
+              <td align="right">2</td>
+              <td>Misty</td>
+              <td align="right">Trainer Gym Leader</td>
+              <td><a href="#" onClick="updatePerson('this.peopleID')">Edit</a></td>
+              <td><a href="#" onclick="deletePerson('this.peopleID')">Delete</a></td>
+            </tr>
+            <tr>
+              <td align="right">3</td>
+              <td>Ash</td>
+              <td align="right">Trainer Apprentice</td>
+              <td><a href="#" onClick="updatePerson('this.peopleID')">Edit</a></td>
+              <td><a href="#" onclick="deletePerson('this.peopleID')">Delete</a></td>
+            </tr>
+          </table>
+          <p>&nbsp;</p>
+        </div> <!-- browse -->
+
+        <div id="insert" style="display: none">
+          <form method="POST" id="addPerson">
+            <legend><strong>Add Person</strong></legend>
+            <fieldset class="fields">
+              <label>* Name </label> <input type="text" name="peopleName" style="margin-bottom: 10px" required>
+              <br>
+              <label>* Affiliation </label> <select name="affiliation" style="margin-bottom: 10px" required>
+                <option value="0">&nbsp;</option>
+                <option value="1">Team Rocket Agent</option>
+                <option value="2">Trainer Gym Leader</option>
+                <option value="3">Trainer Apprentice</option>
+              </select>
+              <br>
+              <button type="submit" id="addPerson">Add Person</button>
+              <button type="button" onClick="browsePerson()">Cancel</button>
+              </p>
+          </form>
+        </div><!-- insert -->
+        <p>&nbsp;</p>
+        <div id="update" style="display: none">
+          <form method="POST" id="updatePerson">
+            <legend><strong>Update Person</strong></legend>
+            <fieldset class="fields">
+              <input type="hidden" name="peopleID" id="updatePersonID" style="margin-bottom: 10px" value="1">
+              <label> ID#: </label> 1
+              <br>
+              <label> Name </label> <input type="text" name="peopleName" style="margin-bottom: 10px" value="Jessie">
+              <br>
+              <label> Affiliation </label><select name="affiliation">
+                <option value="0">Team Rocket Agent</option>
+                <option value="1">Trainer Gym Leader</option>
+                <option value="2">Trainer Apprentice</option>
+              </select>
+              <br><br>
+            </fieldset>
+            <p id="center">
+              <button type="submit" id="UpdateSavePerson">Save Person Updates</button>
+              <button type="button" onClick="browsePerson()">Cancel</button>
+            </p>
+          </form>
+        </div><!-- update -->
+        <p>&nbsp;</p>
+        <div id="delete" style="display: none">
+          <form method="POST" id="deletePerson">
+            <legend><strong>Delete Person</strong></legend>
+            <fieldset class="fields">
+              <p>Are you sure you want to delete this Person from the database?</p>
+              <input type="hidden" name="peopleID" id="deletePersonID" value="1">
+              <label><strong>ID#: </strong></label> 1
+              <br>
+              <label> <strong>Name: </strong> </label> Jessie
+              <br><br>
+            </fieldset>
+            <p id="center">
+              <button type="submit" id="deletePerson">Delete Person</button>
+              <button type="button" onClick="browsePerson()">Cancel</button>
+            </p>
+          </form>
+        </div><!-- delete -->
+      </article>
+    </section>
+  </main>
+  <footer>© 2024 - Elena Parapounsky & Amy Xu</footer>
+</body>
+
 </html>
