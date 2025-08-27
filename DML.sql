@@ -1,351 +1,252 @@
----------------------------------------------------------------
--- Data Definition Queries for the Pokemon Management System --
----------------------------------------------------------------
-SET
-    FOREIGN_KEY_CHECKS = 0;
+-- ---------------------------------------------------------------
+-- Data Manipulation Queries for the Pokemon Management System --
+-- ---------------------------------------------------------------
+SET FOREIGN_KEY_CHECKS = 0;
+SET AUTOCOMMIT = 0;
 
-SET
-    AUTOCOMMIT = 0;
-
----------------------------------------------------------------
+-- ---------------------------------------------------------------
 --               CRUD operations for Entity Tables           --
----------------------------------------------------------------
+-- ---------------------------------------------------------------
 --                    Pokemon Table                          --
----------------------------------------------------------------
+-- ---------------------------------------------------------------
 -- Create
-INSERT INTO
-    Pokemon (pokeName, isBaby, pokeRarity)
-VALUES
-    (:pokeNameInput, :isBabySelect, :pokeRaritySelect);
+INSERT INTO Pokemon (pokeName, isBaby, pokeRarity)
+VALUES (?, ?, ?);
 
 -- Read
-SELECT
+SELECT 
     pokeID AS "Pokemon ID",
-    pokeName AS "Pokemon Name",
+    pokeName AS "Pokemon Name", 
     isBaby AS "Is Baby?",
     pokeRarity AS "Pokemon Rarity"
-FROM
-    Pokemon;
+FROM Pokemon;
 
 -- Update
-UPDATE
-    Pokemon
-SET
-    pokeName = :pokeNameInput,
-    isBaby = :isBabySelect,
-    pokeRarity = :pokeRaritySelect
-WHERE
-    pokeID = :pokeID_selected_from_browse_Pokemon_page;
+UPDATE Pokemon 
+SET 
+    pokeName = ?,
+    isBaby = ?,
+    pokeRarity = ?
+WHERE pokeID = ?;
 
 -- Delete
-DELETE FROM
-    Pokemon
-WHERE
-    pokeID = :pokeID_selected_from_browse_Pokemon_page;
+DELETE FROM Pokemon 
+WHERE pokeID = ?;
 
+-- ---------------------------------------------------------------
 --                    People Table                          --
----------------------------------------------------------------
+-- ---------------------------------------------------------------
 -- Create
---      get affialitionID and "Type Rank" affiliations for Affiliation dropdown
-SELECT
+-- Get affiliationID and "Type Rank" affiliations for Affiliation dropdown
+SELECT 
     affiliationID,
-    CONCAT(affilationType, ' ', affiliationRank) AS affiliation
-FROM
-    Affiliations;
+    CONCAT(affiliationType, ' ', affiliationRank) AS affiliation
+FROM Affiliations;
 
-INSERT INTO
-    People (peopleName, affiliation)
-VALUES
-    (
-        :peopleNameInput,
-        :affiliation_from_dropdown_Input
-    );
+INSERT INTO People (peopleName, affiliationID)
+VALUES (?, ?);
 
 -- Read
-SELECT
+SELECT 
     peopleID AS "Person ID",
     peopleName AS "Person Name",
     CONCAT(
-        Affiliations.affiliationType,
-        ' ',
+        Affiliations.affiliationType, 
+        ' ', 
         Affiliations.affiliationRank
     ) AS "Person Affiliation"
-FROM
-    People
-    INNER JOIN Affiliations ON People.affiliationID = Affiliations.affiliationID;
+FROM People
+INNER JOIN Affiliations ON People.affiliationID = Affiliations.affiliationID;
 
 -- Update
-UPDATE
-    People
-SET
-    peopleName = :peopleNameInput,
-    Affiliation = :affiliationID_from_dropdown_Input
-WHERE
-    peopleID = :peopleID_selected_from_browse_People_page;
+UPDATE People 
+SET 
+    peopleName = ?,
+    affiliationID = ?
+WHERE peopleID = ?;
 
 -- Delete
-DELETE FROM
-    People
-WHERE
-    peopleID = :peopleID_selected_from_browse_People_page;
+DELETE FROM People 
+WHERE peopleID = ?;
 
+-- ---------------------------------------------------------------
 --                    Affiliations Table                          --
----------------------------------------------------------------
+-- ---------------------------------------------------------------
 -- Create
-INSERT INTO
-    Affiliations (
-        affiliationType,
-        affiliationRank,
-        typeDescription
-    )
-VALUES
-    (
-        :affiliationTypeInput,
-        :affiliationRankInput,
-        :typeDescriptionInput
-    );
+INSERT INTO Affiliations (
+    affiliationType,
+    affiliationRank, 
+    typeDescription
+)
+VALUES (?, ?, ?);
 
 -- Read
-SELECT
+SELECT 
     affiliationID AS "Affiliation ID",
     affiliationType AS "Affiliation Type",
     affiliationRank AS "Affiliation Rank",
     typeDescription AS "Type Description"
-FROM
-    Affiliations;
+FROM Affiliations;
 
 -- Update
-UPDATE
-    Affiliations
-SET
-    affiliationType = :affiliationTypeInput,
-    affiliationRank = :affiliationRankInput,
-    typeDescription = :typeDescriptionInput
-WHERE
-    affliationID = :affiliationID_selected_from_browse_Affiliations_page;
+UPDATE Affiliations 
+SET 
+    affiliationType = ?,
+    affiliationRank = ?,
+    typeDescription = ?
+WHERE affiliationID = ?;
 
 -- Delete
-DELETE FROM
-    Affiliations
-WHERE
-    affiliationID = :affiliationID_selected_from_browse_Affiliations_page;
+DELETE FROM Affiliations 
+WHERE affiliationID = ?;
 
+-- ---------------------------------------------------------------
 --                      Types Table                          --
----------------------------------------------------------------
+-- ---------------------------------------------------------------
 -- Create
-INSERT INTO
-    Types (typeName, weakAgainst, strongAgainst)
-VALUES
-    (
-        :typeNameInput,
-        :weakAgainstInput,
-        :strongAgainstInput
-    );
+INSERT INTO Types (typeName, weakAgainst, strongAgainst)
+VALUES (?, ?, ?);
 
 -- Read
-SELECT
+SELECT 
     typeID AS "Type ID",
     typeName AS "Type Name",
     weakAgainst AS "Weak Against",
     strongAgainst AS "Strong Against"
-FROM
-    Types;
+FROM Types;
 
 -- Update
-UPDATE
-    Types
-SET
-    typeName = :typeNameInput,
-    weakAgainst = :weakAgainstInput,
-    strongAgainst = :strongAgainstInput
-WHERE
-    typeID = :typeID_selected_from_browse_Types_page;
+UPDATE Types 
+SET 
+    typeName = ?,
+    weakAgainst = ?,
+    strongAgainst = ?
+WHERE typeID = ?;
 
 -- Delete
-DELETE FROM
-    Types
-WHERE
-    typeID = :typeID_selected_from_browse_Types_page;
+DELETE FROM Types 
+WHERE typeID = ?;
 
+-- ---------------------------------------------------------------
 --                      Battles Table                        --
----------------------------------------------------------------
+-- ---------------------------------------------------------------
 -- Create
-INSERT INTO
-    Battles (battleDate, battleSetting)
-VALUES
-    (:battleDateInput, :battleSettingInput);
+INSERT INTO Battles (battleDate, battleSetting)
+VALUES (?, ?);
 
 -- Read
-SELECT
+SELECT 
     battleID AS "Battle ID",
     battleDate AS "Battle Date",
     battleSetting AS "Battle Setting"
-FROM
-    Battles;
+FROM Battles;
 
 -- Update
-UPDATE
-    Battles
-SET
-    battleDate = :battleDateInput,
-    battleSetting = :battleSettingInput
-WHERE
-    battleID = :battleID_selected_from_browse_Battles_page;
+UPDATE Battles 
+SET 
+    battleDate = ?,
+    battleSetting = ?
+WHERE battleID = ?;
 
 -- Delete
-DELETE FROM
-    Battles
-WHERE
-    battleID = :battleID_selected_from_browse_Battles_page;
+DELETE FROM Battles 
+WHERE battleID = ?;
 
----------------------------------------------------------------
+-- ---------------------------------------------------------------
 --         CRUD operations for Intersecting Tables           --
----------------------------------------------------------------
+-- ---------------------------------------------------------------
 --                 Pokemon_People Table                      --
----------------------------------------------------------------
+-- ---------------------------------------------------------------
 -- Create
---      get pokeID and pokeName for Pokemon dropdown
-SELECT
+-- Get pokeID and pokeName for Pokemon dropdown
+SELECT pokeID, pokeName FROM Pokemon;
+
+-- Get peopleID and peopleName for Owner dropdown  
+SELECT peopleID, peopleName FROM People;
+
+INSERT INTO Pokemon_People (
     pokeID,
-    pokeName
-FROM
-    Pokemon;
-
---      get peopleID and peopleName for Owner dropdown
-SELECT
     peopleID,
-    peopleName
-FROM
-    People;
-
-INSERT INTO
-    Pokemon_People (
-        Pokemon,
-        Owner,
-        pokeNickname,
-        caughtDate,
-        caughtAt
-    )
-VALUES
-    (
-        :pokeID_from_dropdown_Input,
-        :peopleID_from_dropdown_Input,
-        :pokeNicknameInput,
-        :caughtDateInput,
-        :caughtAtInput
-    );
+    pokeNickname,
+    caughtDate,
+    caughtAt
+)
+VALUES (?, ?, ?, ?, ?);
 
 -- Read
-SELECT
+SELECT 
     Pokemon.pokeName AS Pokemon,
     People.peopleName AS Owner,
     pokeNickname AS "Pokemon Nickname",
-    caughtDate AS "Caught Date",
+    caughtDate AS "Caught Date", 
     caughtAt AS "Caught Location"
-FROM
-    Pokemon_People
-    INNER JOIN Pokemon ON Pokemon_People.pokeID = Pokemon.pokeID
-    INNER JOIN People ON Pokemon_People.peopleID = People.peopleID;
+FROM Pokemon_People
+INNER JOIN Pokemon ON Pokemon_People.pokeID = Pokemon.pokeID
+INNER JOIN People ON Pokemon_People.peopleID = People.peopleID;
 
 -- Update
-UPDATE
-    Pokemon_People
-SET
-    pokeNickname = :pokeNicknameInput,
-    caughtDate = :caughtDateInput,
-    caughtAt = :caughtAtInput
-WHERE
-    pokeID = :pokeID_selected_from_browse_Pokemon_People_page
-    AND peopleID = :peopleID_selected_from_browse_Pokemon_People_page;
+UPDATE Pokemon_People 
+SET 
+    pokeNickname = ?,
+    caughtDate = ?,
+    caughtAt = ?
+WHERE pokeID = ? AND peopleID = ?;
 
 -- Delete
-DELETE FROM
-    Pokemon_People
-WHERE
-    pokeID = :pokeID_selected_from_browse_Pokemon_People_page
-    AND peopleID = :peopleID_selected_from_browse_Pokemon_People_page;
+DELETE FROM Pokemon_People 
+WHERE pokeID = ? AND peopleID = ?;
 
+-- ---------------------------------------------------------------
 --                  Pokemon_Types Table                      --
----------------------------------------------------------------
+-- ---------------------------------------------------------------
 -- Create
---      get pokeID and pokeName for Pokemon dropdown
-SELECT
-    pokeID,
-    pokeName
-FROM
-    Pokemon;
+-- Get pokeID and pokeName for Pokemon dropdown
+SELECT pokeID, pokeName FROM Pokemon;
 
---      get typeID and typeName for Type dropdown
-SELECT
-    typeID,
-    typeName
-FROM
-    Types;
+-- Get typeID and typeName for Type dropdown
+SELECT typeID, typeName FROM Types;
 
-INSERT INTO
-    Pokemon_Types (Pokemon, Type)
-VALUES
-    (
-        :pokeID_from_dropdown_Input,
-        :typeID_from_dropdown_Input
-    );
+INSERT INTO Pokemon_Types (pokeID, typeID)
+VALUES (?, ?);
 
 -- Read
-SELECT
+SELECT 
     Pokemon.pokeName AS Pokemon,
     Types.typeName AS Type
-FROM
-    Pokemon_Types
-    INNER JOIN Pokemon ON Pokemon_Types.pokeID = Pokemon.pokeID
-    INNER JOIN Types ON Pokemon_Types.typeID = Types.typeID;
+FROM Pokemon_Types
+INNER JOIN Pokemon ON Pokemon_Types.pokeID = Pokemon.pokeID  
+INNER JOIN Types ON Pokemon_Types.typeID = Types.typeID;
 
 -- Update
--- Unable to update as in intersecting table with no other attributes other than Primary keys
--- Delete
-DELETE FROM
-    Pokemon_Types
-WHERE
-    pokeID = :pokeID_selected_from_browse_Pokemon_Types_page
-    AND typeID = :typeID_selected_from_browse_Pokemon_Types_page;
+-- Unable to update as this is an intersecting table with only Primary keys
 
+-- Delete
+DELETE FROM Pokemon_Types 
+WHERE pokeID = ? AND typeID = ?;
+
+-- ---------------------------------------------------------------
 --                 People_Battles Table                      --
----------------------------------------------------------------
+-- ---------------------------------------------------------------
 -- Create
-INSERT INTO
-    People_Battles (PersonID, battleID, battleResult)
-VALUES
-    (
-        :personIDInput,
-        :battleIDInput,
-        :battleResultSelect
-    );
+INSERT INTO People_Battles (peopleID, battleID, battleResult)
+VALUES (?, ?, ?);
 
 -- Read
-SELECT
+SELECT 
+    peopleBattleID AS "Battle Entry ID",
     peopleID AS "Person ID",
-    battleID AS "Battle ID",
+    battleID AS "Battle ID", 
     battleResult AS "Battle Result"
-FROM
-    People_Battles;
+FROM People_Battles;
 
 -- Update
-UPDATE
-    People_Battles
-SET
-    battleResult = :battleResultSelect;
-
-WHERE
-    peopleID = :peopleID_selected_from_browse_People_Battles_page
-    AND battleID = :battleID_selected_from_browse_People_Battles_page;
+UPDATE People_Battles 
+SET battleResult = ?
+WHERE peopleID = ? AND battleID = ?;
 
 -- Delete
-DELETE FROM
-    People_Battles
-WHERE
-    peopleID = :peopleID_selected_from_browse_People_Battles_page
-    AND battleID = :battleID_selected_from_browse_People_Battles_page;
+DELETE FROM People_Battles 
+WHERE peopleID = ? AND battleID = ?;
 
-SET
-    FOREIGN_KEY_CHECKS = 1;
-
+SET FOREIGN_KEY_CHECKS = 1;
 COMMIT;
