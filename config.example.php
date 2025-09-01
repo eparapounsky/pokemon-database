@@ -1,11 +1,10 @@
 <?php
 // Database configuration template
-// Copy this file to config.php and update with your actual credentials
 
 $host = 'localhost';
 $dbname = 'pokemon_db';
 $username = 'root';
-$password = 'YOUR_PASSWORD_HERE'; // Replace with your actual MySQL password
+$password = 'YOUR_PASSWORD_HERE'; // replace with MySQL password
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
