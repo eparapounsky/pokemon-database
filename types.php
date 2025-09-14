@@ -1,5 +1,4 @@
 <?php
-// filepath: c:\git\pokemon-database\types.php
 require_once 'config.php';
 
 // Handle form submissions
