@@ -73,6 +73,7 @@ try {
 <head>
   <title>Pokemon Management Database - People</title>
   <link href="main.css" rel="stylesheet" type="text/css" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
   <script language="JavaScript">
     function showform(dowhat) {
       /*

@@ -4,6 +4,7 @@
 <title>Battles</title>
 <!-- <meta name="viewport" content="width=device-width,initial-scale=1"> -->
 <link href="main.css" rel="stylesheet" type="text/css" />
+<link rel="icon" type="image/x-icon" href="favicon.ico">
 
 <script language="JavaScript">
     function showform(dowhat) {
