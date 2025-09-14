@@ -1,6 +1,4 @@
 <?php
-// filepath: c:\git\pokemon-database\affiliations.php
-<?php
 require_once 'config.php';
 
 // Handle form submissions
@@ -17,7 +15,7 @@ if ($_POST) {
                     $message = "<div style='color: red;'>Error adding affiliation: " . $e->getMessage() . "</div>";
                 }
                 break;
-                
+
             case 'update':
                 try {
                     $stmt = $pdo->prepare("UPDATE Affiliations SET affiliationType = ?, affiliationRank = ?, typeDescription = ? WHERE affiliationID = ?");
@@ -27,7 +25,7 @@ if ($_POST) {
                     $message = "<div style='color: red;'>Error updating affiliation: " . $e->getMessage() . "</div>";
                 }
                 break;
-                
+
             case 'delete':
                 try {
                     $stmt = $pdo->prepare("DELETE FROM Affiliations WHERE affiliationID = ?");
@@ -52,66 +50,69 @@ try {
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<meta charset="UTF-8">
-<title>Affiliations</title>
-<link href="main.css" rel="stylesheet" type="text/css" />
 
-<script language="JavaScript">
-    function showform(dowhat) {
-        /*
-        * four DIVS: browse, insert, update, delete
-        * this function sets one visible the others not
-        */
-        if (dowhat == 'insert') {
-            document.getElementById('browse').style.display = 'none';
-            document.getElementById('insert').style.display = 'block';
-            document.getElementById('update').style.display = 'none';
-            document.getElementById('delete').style.display = 'none';
+<head>
+    <meta charset="UTF-8">
+    <title>Affiliations</title>
+    <link href="main.css" rel="stylesheet" type="text/css" />
+
+    <script language="JavaScript">
+        function showform(dowhat) {
+            /*
+            * four DIVS: browse, insert, update, delete
+            * this function sets one visible the others not
+            */
+            if (dowhat == 'insert') {
+                document.getElementById('browse').style.display = 'none';
+                document.getElementById('insert').style.display = 'block';
+                document.getElementById('update').style.display = 'none';
+                document.getElementById('delete').style.display = 'none';
+            }
+            else if (dowhat == 'update') {
+                document.getElementById('browse').style.display = 'none';
+                document.getElementById('insert').style.display = 'none';
+                document.getElementById('update').style.display = 'block';
+                document.getElementById('delete').style.display = 'none';
+            }
+            else if (dowhat == 'delete') {
+                document.getElementById('browse').style.display = 'none';
+                document.getElementById('insert').style.display = 'none';
+                document.getElementById('update').style.display = 'none';
+                document.getElementById('delete').style.display = 'block';
+            }
+            else if (dowhat == 'all') {
+                document.getElementById('browse').style.display = 'block';
+                document.getElementById('insert').style.display = 'block';
+                document.getElementById('update').style.display = 'block';
+                document.getElementById('delete').style.display = 'block';
+            }
+            else {
+                document.getElementById('browse').style.display = 'block';
+                document.getElementById('insert').style.display = 'none';
+                document.getElementById('update').style.display = 'none';
+                document.getElementById('delete').style.display = 'none';
+            }
         }
-        else if (dowhat == 'update') {
-            document.getElementById('browse').style.display = 'none';
-            document.getElementById('insert').style.display = 'none';
-            document.getElementById('update').style.display = 'block';
-            document.getElementById('delete').style.display = 'none';
+        function newAffiliation() { showform('insert'); }
+        function updateAffiliation(affiliationID, affiliationType, affiliationRank, typeDescription) {
+            showform('update');
+            document.getElementById('updateAffiliationID').value = affiliationID;
+            document.getElementById('updateAffiliationIDDisplay').textContent = affiliationID;
+            document.getElementById('updateAffiliationType').value = affiliationType;
+            document.getElementById('updateAffiliationRank').value = affiliationRank;
+            document.getElementById('updateTypeDescription').value = typeDescription;
         }
-        else if (dowhat == 'delete') {
-            document.getElementById('browse').style.display = 'none';
-            document.getElementById('insert').style.display = 'none';
-            document.getElementById('update').style.display = 'none';
-            document.getElementById('delete').style.display = 'block';
+        function deleteAffiliation(affiliationID, affiliationType, affiliationRank) {
+            showform('delete');
+            document.getElementById('deleteAffiliationID').value = affiliationID;
+            document.getElementById('deleteAffiliationIDDisplay').textContent = affiliationID;
+            document.getElementById('deleteAffiliationTypeDisplay').textContent = affiliationType;
+            document.getElementById('deleteAffiliationRankDisplay').textContent = affiliationRank;
         }
-        else if (dowhat == 'all') {
-            document.getElementById('browse').style.display = 'block';
-            document.getElementById('insert').style.display = 'block';
-            document.getElementById('update').style.display = 'block';
-            document.getElementById('delete').style.display = 'block';
-        }
-        else { //by default display browse
-            document.getElementById('browse').style.display = 'block';
-            document.getElementById('insert').style.display = 'none';
-            document.getElementById('update').style.display = 'none';
-            document.getElementById('delete').style.display = 'none';
-        }
-    }
-    function newAffiliation() { showform('insert'); }
-    function updateAffiliation(affiliationID, affiliationType, affiliationRank, typeDescription) { 
-        showform('update'); 
-        document.getElementById('updateAffiliationID').value = affiliationID;
-        document.getElementById('updateAffiliationIDDisplay').textContent = affiliationID;
-        document.getElementById('updateAffiliationType').value = affiliationType;
-        document.getElementById('updateAffiliationRank').value = affiliationRank;
-        document.getElementById('updateTypeDescription').value = typeDescription;
-    }
-    function deleteAffiliation(affiliationID, affiliationType, affiliationRank) { 
-        showform('delete'); 
-        document.getElementById('deleteAffiliationID').value = affiliationID;
-        document.getElementById('deleteAffiliationIDDisplay').textContent = affiliationID;
-        document.getElementById('deleteAffiliationTypeDisplay').textContent = affiliationType;
-        document.getElementById('deleteAffiliationRankDisplay').textContent = affiliationRank;
-    }
-    function browseAffiliation() { showform('browse'); }
-    function showAll() { showform('all'); }
-</script>
+        function browseAffiliation() { showform('browse'); }
+        function showAll() { showform('all'); }
+    </script>
+</head>
 
 <body>
     <header>
@@ -157,14 +158,18 @@ try {
                             <th>Delete Entry</th>
                         </tr>
                         <?php foreach ($affiliations as $affiliation): ?>
-                        <tr>
-                            <td align="right"><?php echo htmlspecialchars($affiliation['affiliationID']); ?></td>
-                            <td><?php echo htmlspecialchars($affiliation['affiliationType']); ?></td>
-                            <td><?php echo htmlspecialchars($affiliation['affiliationRank']); ?></td>
-                            <td><?php echo htmlspecialchars($affiliation['typeDescription'] ?? ''); ?></td>
-                            <td><a href="#" onClick="updateAffiliation(<?php echo $affiliation['affiliationID']; ?>, '<?php echo htmlspecialchars($affiliation['affiliationType']); ?>', '<?php echo htmlspecialchars($affiliation['affiliationRank']); ?>', '<?php echo htmlspecialchars($affiliation['typeDescription'] ?? ''); ?>')">Edit</a></td>
-                            <td><a href="#" onclick="deleteAffiliation(<?php echo $affiliation['affiliationID']; ?>, '<?php echo htmlspecialchars($affiliation['affiliationType']); ?>', '<?php echo htmlspecialchars($affiliation['affiliationRank']); ?>')">Delete</a></td>
-                        </tr>
+                            <tr>
+                                <td align="right"><?php echo htmlspecialchars($affiliation['affiliationID']); ?></td>
+                                <td><?php echo htmlspecialchars($affiliation['affiliationType']); ?></td>
+                                <td><?php echo htmlspecialchars($affiliation['affiliationRank']); ?></td>
+                                <td><?php echo htmlspecialchars($affiliation['typeDescription'] ?? ''); ?></td>
+                                <td><a href="#"
+                                        onClick="updateAffiliation(<?php echo $affiliation['affiliationID']; ?>, '<?php echo addslashes(htmlspecialchars($affiliation['affiliationType'])); ?>', '<?php echo addslashes(htmlspecialchars($affiliation['affiliationRank'])); ?>', '<?php echo addslashes(htmlspecialchars($affiliation['typeDescription'] ?? '')); ?>')">Edit</a>
+                                </td>
+                                <td><a href="#"
+                                        onclick="deleteAffiliation(<?php echo $affiliation['affiliationID']; ?>, '<?php echo addslashes(htmlspecialchars($affiliation['affiliationType'])); ?>', '<?php echo addslashes(htmlspecialchars($affiliation['affiliationRank'])); ?>')">Delete</a>
+                                </td>
+                            </tr>
                         <?php endforeach; ?>
                     </table>
                 </div> <!-- browse -->
@@ -199,14 +204,14 @@ try {
                             <input type="hidden" name="affiliationID" id="updateAffiliationID">
                             <label> ID#: </label> <span id="updateAffiliationIDDisplay"></span>
                             <br>
-                            <label> Affiliation Type </label> <input type="text" name="affiliationType" id="updateAffiliationType"
-                                style="margin-bottom: 10px">
+                            <label> Affiliation Type </label> <input type="text" name="affiliationType"
+                                id="updateAffiliationType" style="margin-bottom: 10px">
                             <br>
-                            <label> Affiliation Rank </label> <input type="text" name="affiliationRank" id="updateAffiliationRank"
-                                style="margin-bottom: 10px">
+                            <label> Affiliation Rank </label> <input type="text" name="affiliationRank"
+                                id="updateAffiliationRank" style="margin-bottom: 10px">
                             <br>
-                            <label> Type Description </label> <input type="text" name="typeDescription" id="updateTypeDescription"
-                                style="margin-bottom: 10px">
+                            <label> Type Description </label> <input type="text" name="typeDescription"
+                                id="updateTypeDescription" style="margin-bottom: 10px">
                             <br>
                         </fieldset>
                         <p id="center">
@@ -225,9 +230,11 @@ try {
                             <input type="hidden" name="affiliationID" id="deleteAffiliationID">
                             <label><strong>ID#: </strong></label> <span id="deleteAffiliationIDDisplay"></span>
                             <br>
-                            <label> <strong>Affiliation Type: </strong> </label> <span id="deleteAffiliationTypeDisplay"></span>
+                            <label> <strong>Affiliation Type: </strong> </label> <span
+                                id="deleteAffiliationTypeDisplay"></span>
                             <br>
-                            <label> <strong>Affiliation Rank: </strong> </label> <span id="deleteAffiliationRankDisplay"></span>
+                            <label> <strong>Affiliation Rank: </strong> </label> <span
+                                id="deleteAffiliationRankDisplay"></span>
                             <br><br>
                         </fieldset>
                         <p id="center">
