@@ -153,7 +153,7 @@ try {
     <a href="types.php">Types</a>
     <a href="battles.php">Battles</a>
     <br><br>
-    <a href="pokemontypes.html">Pokemon Types</a>
+    <a href="pokemontypes.php">Pokemon Types</a>
     <a href="pokemonpeople.php">Owned Pokemon</a>
     <a href="peoplebattles.php">Player Battles</a>
   </nav>
