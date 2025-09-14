@@ -1,5 +1,4 @@
 <?php
-// filepath: c:\git\pokemon-database\people.php
 <?php
 require_once 'config.php';
 
@@ -44,7 +43,8 @@ if ($_POST) {
 // Fetch all People with their affiliations for display
 try {
     $stmt = $pdo->query("
-        SELECT p.peopleID, p.peopleName, a.affiliationName 
+        SELECT p.peopleID, p.peopleName, p.affiliationID,
+               CONCAT(a.affiliationType, ' ', a.affiliationRank) AS affiliationName
         FROM People p 
         LEFT JOIN Affiliations a ON p.affiliationID = a.affiliationID 
         ORDER BY p.peopleID
@@ -57,7 +57,12 @@ try {
 
 // Fetch all affiliations for dropdown
 try {
-    $stmt = $pdo->query("SELECT affiliationID, affiliationName FROM Affiliations ORDER BY affiliationName");
+    $stmt = $pdo->query("
+        SELECT affiliationID, 
+               CONCAT(affiliationType, ' ', affiliationRank) AS affiliationName 
+        FROM Affiliations 
+        ORDER BY affiliationType, affiliationRank
+    ");
     $affiliations = $stmt->fetchAll();
 } catch (Exception $e) {
     $affiliations = [];
@@ -134,13 +139,13 @@ try {
     <a href="index.html">Home</a>
     <a href="pokemon.php">Pokemon</a>
     <a href="people.php">People</a>
-    <a href="affiliations.html">Affiliations</a>
-    <a href="types.html">Types</a>
-    <a href="battles.html">Battles</a>
+    <a href="affiliations.php">Affiliations</a>
+    <a href="types.php">Types</a>
+    <a href="battles.php">Battles</a>
     <br><br>
-    <a href="pokemontypes.html">Pokemon Types</a>
-    <a href="pokemonpeople.html">Owned Pokemon</a>
-    <a href="peoplebattles.html">Player Battles</a>
+    <a href="pokemontypes.php">Pokemon Types</a>
+    <a href="pokemonpeople.php">Owned Pokemon</a>
+    <a href="peoplebattles.php">Player Battles</a>
   </nav>
   <main>
     <section>
