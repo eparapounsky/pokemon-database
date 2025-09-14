@@ -1,71 +1,70 @@
 <?php
-<?php
 require_once 'config.php';
 
 // Handle form submissions
 $message = '';
 if ($_POST) {
-    if (isset($_POST['action'])) {
-        switch ($_POST['action']) {
-            case 'add':
-                try {
-                    $stmt = $pdo->prepare("INSERT INTO People (peopleName, affiliationID) VALUES (?, ?)");
-                    $stmt->execute([$_POST['peopleName'], $_POST['affiliation']]);
-                    $message = "<div style='color: green;'>Person added successfully!</div>";
-                } catch (Exception $e) {
-                    $message = "<div style='color: red;'>Error adding person: " . $e->getMessage() . "</div>";
-                }
-                break;
-                
-            case 'update':
-                try {
-                    $stmt = $pdo->prepare("UPDATE People SET peopleName = ?, affiliationID = ? WHERE peopleID = ?");
-                    $stmt->execute([$_POST['peopleName'], $_POST['affiliation'], $_POST['peopleID']]);
-                    $message = "<div style='color: green;'>Person updated successfully!</div>";
-                } catch (Exception $e) {
-                    $message = "<div style='color: red;'>Error updating person: " . $e->getMessage() . "</div>";
-                }
-                break;
-                
-            case 'delete':
-                try {
-                    $stmt = $pdo->prepare("DELETE FROM People WHERE peopleID = ?");
-                    $stmt->execute([$_POST['peopleID']]);
-                    $message = "<div style='color: green;'>Person deleted successfully!</div>";
-                } catch (Exception $e) {
-                    $message = "<div style='color: red;'>Error deleting person: " . $e->getMessage() . "</div>";
-                }
-                break;
+  if (isset($_POST['action'])) {
+    switch ($_POST['action']) {
+      case 'add':
+        try {
+          $stmt = $pdo->prepare("INSERT INTO People (peopleName, affiliationID) VALUES (?, ?)");
+          $stmt->execute([$_POST['peopleName'], $_POST['affiliation']]);
+          $message = "<div style='color: green;'>Person added successfully!</div>";
+        } catch (Exception $e) {
+          $message = "<div style='color: red;'>Error adding person: " . $e->getMessage() . "</div>";
         }
+        break;
+
+      case 'update':
+        try {
+          $stmt = $pdo->prepare("UPDATE People SET peopleName = ?, affiliationID = ? WHERE peopleID = ?");
+          $stmt->execute([$_POST['peopleName'], $_POST['affiliation'], $_POST['peopleID']]);
+          $message = "<div style='color: green;'>Person updated successfully!</div>";
+        } catch (Exception $e) {
+          $message = "<div style='color: red;'>Error updating person: " . $e->getMessage() . "</div>";
+        }
+        break;
+
+      case 'delete':
+        try {
+          $stmt = $pdo->prepare("DELETE FROM People WHERE peopleID = ?");
+          $stmt->execute([$_POST['peopleID']]);
+          $message = "<div style='color: green;'>Person deleted successfully!</div>";
+        } catch (Exception $e) {
+          $message = "<div style='color: red;'>Error deleting person: " . $e->getMessage() . "</div>";
+        }
+        break;
     }
+  }
 }
 
 // Fetch all People with their affiliations for display
 try {
-    $stmt = $pdo->query("
+  $stmt = $pdo->query("
         SELECT p.peopleID, p.peopleName, p.affiliationID,
                CONCAT(a.affiliationType, ' ', a.affiliationRank) AS affiliationName
         FROM People p 
         LEFT JOIN Affiliations a ON p.affiliationID = a.affiliationID 
         ORDER BY p.peopleID
     ");
-    $people = $stmt->fetchAll();
+  $people = $stmt->fetchAll();
 } catch (Exception $e) {
-    $people = [];
-    $message = "<div style='color: red;'>Error fetching people: " . $e->getMessage() . "</div>";
+  $people = [];
+  $message = "<div style='color: red;'>Error fetching people: " . $e->getMessage() . "</div>";
 }
 
 // Fetch all affiliations for dropdown
 try {
-    $stmt = $pdo->query("
+  $stmt = $pdo->query("
         SELECT affiliationID, 
                CONCAT(affiliationType, ' ', affiliationRank) AS affiliationName 
         FROM Affiliations 
         ORDER BY affiliationType, affiliationRank
     ");
-    $affiliations = $stmt->fetchAll();
+  $affiliations = $stmt->fetchAll();
 } catch (Exception $e) {
-    $affiliations = [];
+  $affiliations = [];
 }
 ?>
 
@@ -112,15 +111,15 @@ try {
       }
     }
     function newPerson() { showform('insert'); }
-    function updatePerson(peopleID, peopleName, affiliationID, affiliationName) { 
-      showform('update'); 
+    function updatePerson(peopleID, peopleName, affiliationID, affiliationName) {
+      showform('update');
       document.getElementById('updatePersonID').value = peopleID;
       document.getElementById('updatePersonIDDisplay').textContent = peopleID;
       document.getElementById('updatePersonName').value = peopleName;
       document.getElementById('updatePersonAffiliation').value = affiliationID;
     }
-    function deletePerson(peopleID, peopleName, affiliationName) { 
-      showform('delete'); 
+    function deletePerson(peopleID, peopleName, affiliationName) {
+      showform('delete');
       document.getElementById('deletePersonID').value = peopleID;
       document.getElementById('deletePersonIDDisplay').textContent = peopleID;
       document.getElementById('deletePersonNameDisplay').textContent = peopleName;
@@ -170,13 +169,17 @@ try {
               <th>Delete Entry</th>
             </tr>
             <?php foreach ($people as $person): ?>
-            <tr>
-              <td align="right"><?php echo htmlspecialchars($person['peopleID']); ?></td>
-              <td><?php echo htmlspecialchars($person['peopleName']); ?></td>
-              <td><?php echo htmlspecialchars($person['affiliationName'] ?? 'No Affiliation'); ?></td>
-              <td><a href="#" onClick="updatePerson(<?php echo $person['peopleID']; ?>, '<?php echo htmlspecialchars($person['peopleName']); ?>', <?php echo $person['affiliationID'] ?? 0; ?>, '<?php echo htmlspecialchars($person['affiliationName'] ?? ''); ?>')">Edit</a></td>
-              <td><a href="#" onclick="deletePerson(<?php echo $person['peopleID']; ?>, '<?php echo htmlspecialchars($person['peopleName']); ?>', '<?php echo htmlspecialchars($person['affiliationName'] ?? 'No Affiliation'); ?>')">Delete</a></td>
-            </tr>
+              <tr>
+                <td align="right"><?php echo htmlspecialchars($person['peopleID']); ?></td>
+                <td><?php echo htmlspecialchars($person['peopleName']); ?></td>
+                <td><?php echo htmlspecialchars($person['affiliationName'] ?? 'No Affiliation'); ?></td>
+                <td><a href="#"
+                    onClick="updatePerson(<?php echo $person['peopleID']; ?>, '<?php echo htmlspecialchars($person['peopleName']); ?>', <?php echo $person['affiliationID'] ?? 0; ?>, '<?php echo htmlspecialchars($person['affiliationName'] ?? ''); ?>')">Edit</a>
+                </td>
+                <td><a href="#"
+                    onclick="deletePerson(<?php echo $person['peopleID']; ?>, '<?php echo htmlspecialchars($person['peopleName']); ?>', '<?php echo htmlspecialchars($person['affiliationName'] ?? 'No Affiliation'); ?>')">Delete</a>
+                </td>
+              </tr>
             <?php endforeach; ?>
           </table>
           <p>&nbsp;</p>
@@ -192,9 +195,9 @@ try {
               <label>* Affiliation </label> <select name="affiliation" style="margin-bottom: 10px" required>
                 <option value="">Select Affiliation...</option>
                 <?php foreach ($affiliations as $affiliation): ?>
-                <option value="<?php echo $affiliation['affiliationID']; ?>">
-                  <?php echo htmlspecialchars($affiliation['affiliationName']); ?>
-                </option>
+                  <option value="<?php echo $affiliation['affiliationID']; ?>">
+                    <?php echo htmlspecialchars($affiliation['affiliationName']); ?>
+                  </option>
                 <?php endforeach; ?>
               </select>
               <br>
@@ -212,13 +215,14 @@ try {
               <input type="hidden" name="peopleID" id="updatePersonID" style="margin-bottom: 10px">
               <label> ID#: </label> <span id="updatePersonIDDisplay"></span>
               <br>
-              <label> Name </label> <input type="text" name="peopleName" id="updatePersonName" style="margin-bottom: 10px">
+              <label> Name </label> <input type="text" name="peopleName" id="updatePersonName"
+                style="margin-bottom: 10px">
               <br>
               <label> Affiliation </label><select name="affiliation" id="updatePersonAffiliation">
                 <?php foreach ($affiliations as $affiliation): ?>
-                <option value="<?php echo $affiliation['affiliationID']; ?>">
-                  <?php echo htmlspecialchars($affiliation['affiliationName']); ?>
-                </option>
+                  <option value="<?php echo $affiliation['affiliationID']; ?>">
+                    <?php echo htmlspecialchars($affiliation['affiliationName']); ?>
+                  </option>
                 <?php endforeach; ?>
               </select>
               <br><br>
