@@ -56,15 +56,15 @@
 
     <nav>
         <a href="index.html">Home</a>
-        <a href="pokemon.html">Pokemon</a>
-        <a href="people.html">People</a>
-        <a href="affiliations.html">Affiliations</a>
-        <a href="types.html">Types</a>
-        <a href="battles.html">Battles</a>
+        <a href="pokemon.php">Pokemon</a>
+        <a href="people.php">People</a>
+        <a href="affiliations.php">Affiliations</a>
+        <a href="types.php">Types</a>
+        <a href="battles.php">Battles</a>
         <br><br>
-        <a href="pokemontypes.html">Pokemon Types</a>
-        <a href="pokemonpeople.html">Owned Pokemon</a>
-        <a href="peoplebattles.html">Player Battles</a>
+        <a href="pokemontypes.php">Pokemon Types</a>
+        <a href="pokemonpeople.php">Owned Pokemon</a>
+        <a href="peoplebattles.php">Player Battles</a>
     </nav>
 
     <main>
