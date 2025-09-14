@@ -4,7 +4,7 @@ A comprehensive web-based database management system for monitoring the Pokemon 
 
 ## Live Demo
 
-See the project [here](https://web.engr.oregonstate.edu/~xua/cs340/index.html)
+See the project [here](https://pokemon-database.infinityfreeapp.com/)
 
 ## Features
 
