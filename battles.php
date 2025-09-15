@@ -74,7 +74,7 @@
 
             <article id="battles">
                 <p id="center">
-                    Keep track of battles that have taken place
+                    Battles that have taken place
                 </p>
 
                 <div id="browse">
