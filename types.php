@@ -15,7 +15,7 @@ if ($_POST) {
                     $message = "<div style='color: red;'>Error adding type: " . $e->getMessage() . "</div>";
                 }
                 break;
-                
+
             case 'update':
                 try {
                     $stmt = $pdo->prepare("UPDATE Types SET typeName = ?, weakAgainst = ?, strongAgainst = ? WHERE typeID = ?");
@@ -25,7 +25,7 @@ if ($_POST) {
                     $message = "<div style='color: red;'>Error updating type: " . $e->getMessage() . "</div>";
                 }
                 break;
-                
+
             case 'delete':
                 try {
                     $stmt = $pdo->prepare("DELETE FROM Types WHERE typeID = ?");
@@ -102,16 +102,16 @@ try {
         }
     }
     function newType() { showform('insert'); }
-    function updateType(typeID, typeName, weakAgainst, strongAgainst) { 
-        showform('update'); 
+    function updateType(typeID, typeName, weakAgainst, strongAgainst) {
+        showform('update');
         document.getElementById('updateTypeID').value = typeID;
         document.getElementById('updateTypeIDDisplay').textContent = typeID;
         document.getElementById('updateTypeName').value = typeName;
         document.getElementById('updateWeakAgainst').value = weakAgainst.toLowerCase();
         document.getElementById('updateStrongAgainst').value = strongAgainst.toLowerCase();
     }
-    function deleteType(typeID, typeName, weakAgainst, strongAgainst) { 
-        showform('delete'); 
+    function deleteType(typeID, typeName, weakAgainst, strongAgainst) {
+        showform('delete');
         document.getElementById('deleteTypeID').value = typeID;
         document.getElementById('deleteTypeIDDisplay').textContent = typeID;
         document.getElementById('deleteTypeNameDisplay').textContent = typeName;
@@ -124,7 +124,7 @@ try {
 
 <body>
     <header>
-        <h1>Pokemon Management System Database</h1>
+        <h1>Pokemon Database</h1>
     </header>
 
     <nav>
@@ -166,14 +166,18 @@ try {
                             <th>Delete Entry</th>
                         </tr>
                         <?php foreach ($types as $type): ?>
-                        <tr>
-                            <td align="right"><?php echo htmlspecialchars($type['typeID']); ?></td>
-                            <td><?php echo htmlspecialchars($type['typeName']); ?></td>
-                            <td><?php echo htmlspecialchars($type['weakAgainst']); ?></td>
-                            <td><?php echo htmlspecialchars($type['strongAgainst']); ?></td>
-                            <td><a href="#" onClick="updateType(<?php echo $type['typeID']; ?>, '<?php echo htmlspecialchars($type['typeName']); ?>', '<?php echo htmlspecialchars($type['weakAgainst']); ?>', '<?php echo htmlspecialchars($type['strongAgainst']); ?>')">Edit</a></td>
-                            <td><a href="#" onclick="deleteType(<?php echo $type['typeID']; ?>, '<?php echo htmlspecialchars($type['typeName']); ?>', '<?php echo htmlspecialchars($type['weakAgainst']); ?>', '<?php echo htmlspecialchars($type['strongAgainst']); ?>')">Delete</a></td>
-                        </tr>
+                            <tr>
+                                <td align="right"><?php echo htmlspecialchars($type['typeID']); ?></td>
+                                <td><?php echo htmlspecialchars($type['typeName']); ?></td>
+                                <td><?php echo htmlspecialchars($type['weakAgainst']); ?></td>
+                                <td><?php echo htmlspecialchars($type['strongAgainst']); ?></td>
+                                <td><a href="#"
+                                        onClick="updateType(<?php echo $type['typeID']; ?>, '<?php echo htmlspecialchars($type['typeName']); ?>', '<?php echo htmlspecialchars($type['weakAgainst']); ?>', '<?php echo htmlspecialchars($type['strongAgainst']); ?>')">Edit</a>
+                                </td>
+                                <td><a href="#"
+                                        onclick="deleteType(<?php echo $type['typeID']; ?>, '<?php echo htmlspecialchars($type['typeName']); ?>', '<?php echo htmlspecialchars($type['weakAgainst']); ?>', '<?php echo htmlspecialchars($type['strongAgainst']); ?>')">Delete</a>
+                                </td>
+                            </tr>
                         <?php endforeach; ?>
                     </table>
                 </div> <!-- browse -->
@@ -190,9 +194,9 @@ try {
                             <select name="weakAgainst" style="margin-bottom: 10px" required>
                                 <option value="">Select Type...</option>
                                 <?php foreach ($typeNames as $typeName): ?>
-                                <option value="<?php echo strtolower($typeName['typeName']); ?>">
-                                    <?php echo htmlspecialchars($typeName['typeName']); ?>
-                                </option>
+                                    <option value="<?php echo strtolower($typeName['typeName']); ?>">
+                                        <?php echo htmlspecialchars($typeName['typeName']); ?>
+                                    </option>
                                 <?php endforeach; ?>
                                 <option value="bug">Bug</option>
                                 <option value="dark">Dark</option>
@@ -218,9 +222,9 @@ try {
                             <select name="strongAgainst" style="margin-bottom: 10px" required>
                                 <option value="">Select Type...</option>
                                 <?php foreach ($typeNames as $typeName): ?>
-                                <option value="<?php echo strtolower($typeName['typeName']); ?>">
-                                    <?php echo htmlspecialchars($typeName['typeName']); ?>
-                                </option>
+                                    <option value="<?php echo strtolower($typeName['typeName']); ?>">
+                                        <?php echo htmlspecialchars($typeName['typeName']); ?>
+                                    </option>
                                 <?php endforeach; ?>
                                 <option value="bug">Bug</option>
                                 <option value="dark">Dark</option>
@@ -258,15 +262,16 @@ try {
                             <input type="hidden" name="typeID" id="updateTypeID">
                             <label> ID#: </label> <span id="updateTypeIDDisplay"></span>
                             <br>
-                            <label> Type Name </label> <input type="text" name="typeName" id="updateTypeName" style="margin-bottom: 10px">
+                            <label> Type Name </label> <input type="text" name="typeName" id="updateTypeName"
+                                style="margin-bottom: 10px">
                             <br>
                             <label> Weak Against </label>
                             <select name="weakAgainst" id="updateWeakAgainst" style="margin-bottom: 10px">
                                 <option value="">Select Type...</option>
                                 <?php foreach ($typeNames as $typeName): ?>
-                                <option value="<?php echo strtolower($typeName['typeName']); ?>">
-                                    <?php echo htmlspecialchars($typeName['typeName']); ?>
-                                </option>
+                                    <option value="<?php echo strtolower($typeName['typeName']); ?>">
+                                        <?php echo htmlspecialchars($typeName['typeName']); ?>
+                                    </option>
                                 <?php endforeach; ?>
                                 <option value="bug">Bug</option>
                                 <option value="dark">Dark</option>
@@ -292,9 +297,9 @@ try {
                             <select name="strongAgainst" id="updateStrongAgainst" style="margin-bottom: 10px">
                                 <option value="">Select Type...</option>
                                 <?php foreach ($typeNames as $typeName): ?>
-                                <option value="<?php echo strtolower($typeName['typeName']); ?>">
-                                    <?php echo htmlspecialchars($typeName['typeName']); ?>
-                                </option>
+                                    <option value="<?php echo strtolower($typeName['typeName']); ?>">
+                                        <?php echo htmlspecialchars($typeName['typeName']); ?>
+                                    </option>
                                 <?php endforeach; ?>
                                 <option value="bug">Bug</option>
                                 <option value="dark">Dark</option>
@@ -337,7 +342,8 @@ try {
                             <br>
                             <label> <strong>Weak Against: </strong> </label> <span id="deleteWeakAgainstDisplay"></span>
                             <br>
-                            <label> <strong>Strong Against: </strong> </label> <span id="deleteStrongAgainstDisplay"></span>
+                            <label> <strong>Strong Against: </strong> </label> <span
+                                id="deleteStrongAgainstDisplay"></span>
                             <br><br>
                         </fieldset>
                         <p id="center">

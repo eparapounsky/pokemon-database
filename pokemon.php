@@ -60,7 +60,7 @@ try {
 <html>
 
 <head>
-  <title>Pokemon Management Database - Pokemon</title>
+  <title>Pokemon</title>
   <link href="main.css" rel="stylesheet" type="text/css" />
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   
@@ -117,7 +117,7 @@ try {
 
 <body>
   <header>
-    <h1>Pokemon Management System Database</h1>
+    <h1>Pokemon Database</h1>
   </header>
   <nav>
     <a href="index.html">Home</a>

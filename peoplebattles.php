@@ -155,7 +155,7 @@ try {
 
 <body>
     <header>
-        <h1>Pokemon Management System Database</h1>
+        <h1>Pokemon Database</h1>
     </header>
 
     <nav>
