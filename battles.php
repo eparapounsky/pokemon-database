@@ -172,7 +172,10 @@
                 </div><!-- delete -->
         </section>
     </main>
-    <footer>© 2025 - Elena Parapounsky & Amy Xu</footer>
+    <footer>© 2025 - Elena Parapounsky & Amy Xu
+        <br>
+        <a href="https://github.com/eparapounsky/pokemon-database">🔍 Source on GitHub</a>
+    </footer>
 </body>
 
 </html>
