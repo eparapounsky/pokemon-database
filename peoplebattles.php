@@ -178,7 +178,7 @@ try {
 
             <article id="playerBattles">
                 <p id="center">
-                    List of battles that people have been in
+                    Battles that people have participated in
                 </p>
 
                 <div id="browse">

@@ -159,7 +159,7 @@ try {
       <?php echo $message; ?>
       <article id="pokemontypes">
         <p id="center">
-          List of Pokemon and their associated typing.
+          Known Pokemon and their associated types
         </p>
 
         <div id="browse">

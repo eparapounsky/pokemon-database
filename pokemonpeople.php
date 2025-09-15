@@ -164,7 +164,7 @@ try {
       <?php echo $message; ?>
       <article id="pokemonpeople">
         <p id="center">
-          List of Pokemon that are owned by trainers.
+          Known Pokemon and their owners
         </p>
 
         <div id="browse">
