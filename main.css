@@ -387,6 +387,43 @@ footer {
 .p-md { padding: var(--spacing-md); }
 .p-lg { padding: var(--spacing-lg); }
 
+/* ----- Legacy ID Support for PHP Files ----- */
+#center {
+  text-align: center;
+}
+
+#centerMargin {
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* ----- Browse Section Styling ----- */
+#browse {
+  text-align: center;
+}
+
+#browse p {
+  text-align: center;
+  margin-bottom: var(--spacing-md);
+}
+
+#browse table {
+  margin: var(--spacing-lg) auto;
+  text-align: left; /* Keep table content left-aligned for readability */
+}
+
+/* ----- Form Section Centering ----- */
+#insert, #update, #delete {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Center form buttons */
+form p#center {
+  text-align: center;
+  margin-top: var(--spacing-lg);
+}
+
 /* ----- TABLET Styles (768px+) ----- */
 @media (min-width: 768px) {
   .container {
