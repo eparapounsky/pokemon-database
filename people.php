@@ -153,7 +153,7 @@ try {
       <?php echo $message; ?>
       <article id="people">
         <p id="center">
-          List of people (Trainers, Gym Leaders, Team Rocket, Professors)
+          List of known people
         </p>
 
         <div id="browse">
@@ -259,9 +259,9 @@ try {
     </section>
   </main>
   <footer>© 2025 - Elena Parapounsky & Amy Xu
-        <br>
-        <a href="https://github.com/eparapounsky/pokemon-database">🔍 Source on GitHub</a>
-    </footer>
+    <br>
+    <a href="https://github.com/eparapounsky/pokemon-database">🔍 Source on GitHub</a>
+  </footer>
 </body>
 
 </html>
