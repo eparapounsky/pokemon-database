@@ -12,7 +12,7 @@ See the project [here](https://pokemon-database.infinityfreeapp.com/)
 
 - **Pokemon**: Track species, rarity, baby status
 - **People**: Manage trainers and their affiliations
-- **Types**: 10 elemental types with strengths/weaknesses
+- **Types**: 18 elemental types with strengths/weaknesses
 - **Battles**: Record battle outcomes and participants
 - **Affiliations**: Track organizations, teams, and ranks
 
